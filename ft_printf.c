@@ -4,9 +4,27 @@
 
 int		ft_printf(const char *format, ...)
 {
-	va_list ap;
-	va_start(ap, format);
-	if(!strcmp(format, "%d"))
+	char *ptr;
+	char *keep_ptr;
+	t_param param;
+	ptr = strdup(format);
+	keep_ptr = ptr;
+	va_start(param.ap, format);
+	param.printed = 0;
+	while (*ptr)
+	{
+		while (*ptr != '%' && *ptr){
+			ft_putchar(*ptr++);
+			param.printed++;
+		}
+		if (*ptr)
+		{
+			get_param(&param,&ptr);
+		//	print_param(param);
+			param.printed += print_item(&param);
+		}
+	}
+	/*if(!strcmp(format, "%d"))
 	{
 		int x = va_arg (ap, int);
 		printf ("You passed decimal object with value %d\n", x);
@@ -17,6 +35,6 @@ int		ft_printf(const char *format, ...)
 		char *p = va_arg (ap, char *);
 		printf ("You passed c-string \"%s\"\n", p);
 	}
-	va_end (ap);
-	return (0);
+*/	va_end (param.ap);
+	return (param.printed);
 }
