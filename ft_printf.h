@@ -3,10 +3,11 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdint.h>
-# define INT int
-
+# include <string.h>
 # include <stdio.h>
-
+# define BASE_8 "01" //234567"
+# define BASE_16u "0123456789ABCDEF"
+# define BASE_16l "0123456789abcdef"
 typedef struct			s_flag
 {
 	unsigned char		minus;
@@ -23,6 +24,7 @@ typedef struct			s_param
 	int					width;
 	int					precision;
 	int					printed;
+	char				*str;
 	t_flag				flag;
 	va_list				ap;
 
@@ -44,10 +46,15 @@ int						ft_printf(const char *format, ...);
 int						ft_putstr(char *str);
 int						ft_itoa_x(uintmax_t nbr, char *_base);
 int						conversion(t_param *param);
-int						ft_itoa(intmax_t nbr);
-int						ft_itoa_o(uintmax_t nbr, char *_base);
+int						ft_itoa(intmax_t nbr, t_param *param);
+int						ft_itoa_b(uintmax_t nbr, char *_base, t_param *param);
 int						nbr_length(intmax_t nbr, int base);
-int						ft_strlen(char *str);
+int						 ft_getstr(char *str, t_param *param);
+int						ft_getchar(char c, t_param *param);
+int						ft_strlen(const char *str);
+char					*ft_strjoin(char const *s1, char const *s2);
+int						apply_flags(t_param *param);
+int						ft_ftoa(double nbr,t_param *param);
 
 
 #endif

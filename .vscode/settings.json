@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"cstdint": "cpp"
+		"cstdint": "cpp",
+		"ft_printf.h": "c"
 	}
 }

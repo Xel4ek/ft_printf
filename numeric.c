@@ -10,7 +10,7 @@ int nbr_length(intmax_t nbr, int base)
 	return len;
 }
 
-int ft_strlen(char *str)
+int ft_strlen(const char *str)
 {
 	int count;
 
@@ -34,6 +34,7 @@ int	ft_itoa_x(uintmax_t nbr, char *_base)
 	int count;
 
 	count = 0;
+
 //	printf("%p\n",&nbr);
 //	void *tmp;
 //	tmp=(void*)(&nbr);
@@ -61,7 +62,7 @@ int	ft_itoa_x(uintmax_t nbr, char *_base)
 	return (count);
 }
 
-int	ft_itoa_o(uintmax_t nbr, char *_base)
+int	ft_itoa_b(uintmax_t nbr, char *_base, t_param *param)
 {
 	char str[64];
 	int len;
@@ -77,11 +78,15 @@ int	ft_itoa_o(uintmax_t nbr, char *_base)
 		str[len] = _base[nbr % base];
 		nbr /= base;
 	}
-	ft_putstr(str);
+	param->str = ft_strjoin(param->str, str);
+	// int i = 0;
+	// while (i < 55)
+	// 	param->str[i++] = '1';
+	// param->str[55]=0;
 	return (len_s);
 }
 
-int	ft_itoa(intmax_t nbr)
+int	ft_itoa(intmax_t nbr, t_param *param)
 {
 	char str[64];
 	int len;
@@ -104,6 +109,61 @@ int	ft_itoa(intmax_t nbr)
 	}
 	if (sign)
 		*str = '-';
-	ft_putstr(str);
+	param->str = ft_strjoin(param->str, str);
 	return (len_s);
+}
+
+int ft_ftoa(double nbr,t_param *param)
+{
+	void *adr;
+
+	int base = 16;
+	char _base[] = "0123456789abcdef";
+	int flag;
+	char put;
+	size_t size;
+	flag = 0;
+	adr = (void*)(&nbr);
+	size = sizeof(nbr);
+//	printf("%ld\n <size",size);
+	int count;
+
+	count = 0;
+
+//	printf("%p\n",&nbr);
+//	void *tmp;
+//	tmp=(void*)(&nbr);
+//	adr = (void*)(&tmp);
+//	size = sizeof(&tmp);
+//	ft_putstr("0x");
+
+	// char str[64];
+	// int len;
+	// int len_s;
+	// int base;
+
+	// base = ft_strlen(_base);
+	// len = nbr_length(nbr, base);
+	// len_s = len;
+	// str[len] = 0;
+	// while (len--)
+	// {
+	// 	str[len] = _base[nbr % base];
+	// 	nbr /= base;
+	// }
+	// param->str = ft_strjoin(param->str, str);
+	// // int i = 0;
+	// // while (i < 55)
+	// // 	param->str[i++] = '1';
+	// // param->str[55]=0;
+	// return (len_s);
+
+
+
+	size_t i = 0;
+	while (0 < size--)
+	{
+		ft_printf("%02x ",((unsigned char*)adr)[size]);
+	}
+	return 1;
 }

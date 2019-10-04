@@ -20,8 +20,12 @@ int		ft_printf(const char *format, ...)
 		if (*ptr)
 		{
 			get_param(&param,&ptr);
-		//	print_param(param);
-			param.printed += print_item(&param);
+			// print_param(param);
+			print_item(&param);
+			apply_flags(&param);
+			param.printed += ft_strlen(param.str);
+			ft_putstr(param.str);
+			// print_param(param);
 		}
 	}
 	/*if(!strcmp(format, "%d"))

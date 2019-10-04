@@ -1,5 +1,22 @@
 #include "ft_printf.h"
 
+#include <stdlib.h>
+
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	int		len;
+
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	strcpy(str, s1);
+	strcat(str, s2);
+	return (str);
+}
+
 char is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
@@ -27,6 +44,8 @@ int get_flag(char *str,t_flag *flag)
 
 int get_width(char *str)
 {
+	if (*str == '*')
+		return -1;
 	return atoi(str);
 }
 
@@ -83,59 +102,49 @@ int	conversion(t_param *param)
 {
 	//print_param(param);
 	if (param->type == 'c')
-		return ft_putchar(va_arg(param->ap, int));
-	if (param->type == 'd')//iouxX')
+		return ft_getchar(va_arg(param->ap, int),param);
+	if (param->type == 'd' || param->type == 'i')//iouxX')
 	{
 		if (param->length == 'h'+'h')
-			return (ft_itoa(va_arg(param->ap, int)));//va_arg(param->ap,char)
+			return (ft_itoa(va_arg(param->ap, int), param));//va_arg(param->ap,char)
 		if (param->length == 'h')
-			return (ft_itoa(va_arg(param->ap, int)));//va_arg(param->ap,short int)
+			return (ft_itoa(va_arg(param->ap, int), param));//va_arg(param->ap,short int)
 		if (param->length == 0)
-			return (ft_itoa(va_arg(param->ap, int)));
+			return (ft_itoa(va_arg(param->ap, int), param));
 		if (param->length == 'l')
-			return (ft_itoa(va_arg(param->ap, long int)));;//va_arg(param->ap,long int)
+			return (ft_itoa(va_arg(param->ap, long int), param));;//va_arg(param->ap,long int)
 		if (param->length == 'l'+'l')
-			return (ft_itoa(va_arg(param->ap, long long int)));//va_arg(param->ap,long long int)
+			return (ft_itoa(va_arg(param->ap, long long int), param));//va_arg(param->ap,long long int)
 		if (param->length == 'z' || param->length =='t')
-			return (ft_itoa(va_arg(param->ap, size_t)));//va_arg(param->ap,size_t)
+			return (ft_itoa(va_arg(param->ap, size_t), param));//va_arg(param->ap,size_t)
 	}
 	if (param->type == 'f')
 	{
 		if (param->length == 0)
-			return 1;//va_arg(param->ap,float)
+			return ft_ftoa(va_arg(param->ap, double), param);//va_arg(param->ap,float)
 		if (param->length == 'L' || param->length == 'l')
 			return 1;//va_arg(param->ap,long double)
 	}
 	if (param->type == 's' )
 	{
-			return (ft_putstr(va_arg(param->ap,char*)));
+		return (ft_getstr(va_arg(param->ap,char*), param));
 	}
 	if (param->type == 'p')
 	{
-			ft_putstr("0x");
-			param->printed += 2;
-			return (ft_itoa_x(va_arg(param->ap, size_t), "0123456789abcdef"));
+		param->str = ft_strjoin("0x", param->str);
+		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_16l, param));
 	}
 	if (param->type == 'X')
 	{
-		if (param->flag.hash == 1){
-			ft_putstr("0X");
-			param->printed += 2;}
-		return (ft_itoa_x(va_arg(param->ap, long long int), "0123456789ABCDEF"));
+		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_16u, param));
 	}
 	if (param->type == 'x')
 	{
-		if (param->flag.hash == 1){
-			ft_putstr("0x");
-			param->printed += 2;}
-			return (ft_itoa_x(va_arg(param->ap, long long int), "0123456789abcdef"));
+		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_16l, param));
 	}
 	if (param->type == 'o')
 	{
-		if (param->flag.hash == 1){
-			ft_putstr("0");
-			param->printed++;}
-		return (ft_itoa_o(va_arg(param->ap, long long int), "01234567"));
+		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_8, param));
 	}
 
 	return 0;

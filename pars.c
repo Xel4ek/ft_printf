@@ -31,6 +31,8 @@ t_param 	*get_param(t_param *new_param, char **str)
 	}
 	if (!(new_param->type = get_type((*str))))
 		return (NULL);
+	new_param->str = (char*)malloc(1);
+	*(new_param->str) = 0;
 	(*str)++;
 	return (new_param);
 }
@@ -46,4 +48,5 @@ void print_param(t_param param)
 	printf("%d < precision\n",param.precision);
 	printf("%d < length\n",param.length);
 	printf("%c < type\n",param.type);
+	printf("%s < str\n",param.str);
 }
