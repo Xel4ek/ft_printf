@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/main.dir/ft_printf.c.o CMakeFiles/main.dir/main.c.o CMakeFiles/main.dir/numeric.c.o CMakeFiles/main.dir/parse.c.o CMakeFiles/main.dir/print_tool.c.o CMakeFiles/main.dir/tools.c.o  -o main -llib 

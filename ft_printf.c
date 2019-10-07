@@ -7,7 +7,7 @@ int		ft_printf(const char *format, ...)
 	char *ptr;
 	char *keep_ptr;
 	t_param param;
-	ptr = strdup(format);
+	ptr = ft_strdup(format);
 	keep_ptr = ptr;
 	va_start(param.ap, format);
 	param.printed = 0;
