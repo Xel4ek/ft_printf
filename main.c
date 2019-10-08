@@ -8,8 +8,10 @@ int	main()
 //	ft_printf("%d", 255);
 //	ft_printf("%s", "test string");
 	char *str;
-	double i;
-	i=1/3.;
+    double i;
+	i=-4503599627370496.e+114 ;
+
+
 	int j =7;
 //	str = ft_strdup("%+0 #-123.56lld hwbuwadbujab wu !<was");
 	str = ft_strdup("%+test string");
@@ -18,8 +20,8 @@ int	main()
 //	print_param(&param);
 //	ft_printf("moulitest: %.x %.0X\n",i,i);
 
-	printf("(   %d) \n",ft_printf("%f",i));
-    printf("(   %d) \n",printf("%.169f",i));
+	printf("(   %d) \n",ft_printf("%16f",i));
+    printf("(   %d) \n",printf("%16f",i));
 	// printf("(   %d) \n",ft_printf("%o\n",16));
 	//printf("(   %d) \n",printf("%f",i));
 	// print_param(param);

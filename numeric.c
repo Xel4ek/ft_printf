@@ -104,17 +104,20 @@ int ft_itoa_p(intmax_t nbr, t_param *param) {
     return (len_s);
 }
 
-int ft_ftoa(double nbr, t_param *param) {
+int ft_dtoa(double nbr, t_param *param) {
+    if (param->precision == 0)
+        param->precision = 6;
     void *adr;
     size_t size;
     char *str;
     int max_len;
-    max_len = 169;
+    int shift;
+    max_len = 10000 + 14;
     int i;
     size_t j;
     const uintmax_t mask = 0xFFFFFFFFFFFF;
-
-    if(!(str = (char*)malloc(sizeof(*str) * max_len)))
+    int in_main;
+    if (!(str = (char *) malloc(sizeof(*str) * max_len + 1)))
         return 0;
     i = 0;
     while (i < max_len)
@@ -122,54 +125,194 @@ int ft_ftoa(double nbr, t_param *param) {
     adr = (void *) (&nbr);
     size = sizeof(nbr);
 
-    while (0 < size--) {
-        ft_printf("%08b ", ((unsigned char *) adr)[size]);
-
-    }
+//    while (0 < size--) {
+//        ft_printf("%08b ", ((unsigned char *) adr)[size]);
+//
+//    }
     size = sizeof(nbr);
-    ft_printf("\n");
-    while (0 < size--) {
-        ft_printf("%02x       ", ((unsigned char *) adr)[size]);
-    }
+//    ft_printf("\n");
+//    while (0 < size--) {
+//        ft_printf("%02x       ", ((unsigned char *) adr)[size]);
+//    }
 
 
-    uintmax_t mantissa = *(uintmax_t*)(&nbr) & 0x000fffffffffffff;
-    uintmax_t exponent = (*(uintmax_t*)(&nbr) & 0x3ff0000000000000) >> 52;//(uintmax_t)(void*)(&nbr);
+    uintmax_t mantissa = *(uintmax_t *) (&nbr) & 0x000fffffffffffff;
+    mantissa |= 0x0010000000000000;
+    intmax_t exponent = (*(uintmax_t *) (&nbr) & 0x7ff0000000000000) >> 52;//(uintmax_t)(void*)(&nbr);
     size = sizeof(mantissa);
-    adr = (void*)(&mantissa);
-    ft_printf("\nmantissa:\n");
-    while (0 < size--) {
-        ft_printf("%08b ", ((unsigned char *) adr)[size]);
-    }
+    adr = (void *) (&mantissa);
+//    ft_printf("\nmantissa:\n");
+//    while (0 < size--) {
+//        ft_printf("%08b ", ((unsigned char *) adr)[size]);
+//    }
     size = sizeof(exponent);
-    adr = (void*)(&exponent);
-    ft_printf("\nexponent\n");
-    while (0 < size--) {
-        ft_printf("%08b ", ((unsigned char *) adr)[size]);
-    }
-    ft_printf("\n%0ld\n", mantissa);
-    printf("%0ld < here\n",mantissa);
+    adr = (void *) (&exponent);
+//    ft_printf("\nexponent\n");
+//    while (0 < size--) {
+//        ft_printf("%08b ", ((unsigned char *) adr)[size]);
+//    }
+//    ft_printf("\n%0ld < exponent\n", exponent);
+//    printf("%0ld < mantissa\n", mantissa);
 
-    i= 16;
-    while (i--) {
-        str[i] = mantissa % 10;
-        mantissa /= 10;
-    }
-    i = 1;
-    while (i--)
-    {
-        j = 0;
-        while(j < max_len - 1){
-            str[j + 1] = str[j + 1] + (str[j] % 2) * 10;
-            str[j] = str[j] / 2;
-            j++;
+//    shift= 17 + ((int)(0.3010299956639813 * (exponent  - 1023 - 52)));
+//    printf("%d < you?\n", shift);
+//    i = shift;
+//    while (i--) {
+//        str[i] = mantissa % 10;
+//        mantissa /= 10;
+//    }
+    i = exponent - 1023 - 52;
+
+//    printf("%d < power(i)\n", i);
+//    printf("%d < power\n", ((int) (0.3010299956639813 * i)));
+
+
+    shift = 17 + ((int) (0.3010299956639813 * (exponent - 1023 - 52)));
+//    printf("%d < you?\n", shift);
+
+//    if ((*(uintmax_t *) (&nbr)) >> 63 == 1)
+//        ft_printf("\n-");
+    if (i < 0) {
+          shift = -shift;
+//        printf("%d < you?\n", shift);
+//        i = shift;
+        i = 20;
+        while (i--) {
+            str[i] = mantissa % 10;
+
+            mantissa /= 10;
         }
-        str[max_len - 1] /= 2;
+        i = exponent - 1023 - 52;
+
+        while (i++) {
+            j = 0;
+            while (j < max_len - 1) {
+                str[j + 1] = str[j + 1] + (str[j] % 2) * 10;
+                str[j] = str[j] / 2;
+                j++;
+            }
+            str[max_len - 1] /= 2;
+        }
+        i = shift + 21;
+
+
+//        if (i >= 20) {
+//            j = 20;
+//            ft_printf("0.");
+//            while (j++ < i)
+//                ft_printf("0");
+//
+//
+//        }
+//        while (i < max_len - 20)
+//            if (20 - i == 0) {
+//                ft_printf(".");
+//                i++;
+//            }
+//        else {
+//                ft_printf("%d", str[i++]);
+//            }
+
+            i = 0;
+//            while(i<max_len)
+//                ft_printf("%c",str[i++]+ '0');
+    } else {
+
+        i = shift + 2;
+        while (i--) {
+            str[i] = mantissa % 10;
+            mantissa /= 10;
+        }
+        i = exponent - 1023 - 52;
+        while (i--) {
+            j = max_len;
+            in_main = 0;
+            while (j-- > 0) {
+
+                str[j] = 2 * str[j] + in_main;
+                in_main = str[j] / 10;
+                str[j] %= 10;
+            }
+            str[max_len - 1] /= 2;
+        }
+
+    i = 0;
+
+//    while (i < max_len - 12)
+//        if (i != shift)
+//            ft_printf("%d", str[i++]);
+//        else
+//        {
+//            ft_printf(".");
+//            i++;
+//        }
     }
 
     i = 0;
-    ft_printf("\n");
-    while (i < max_len)
-        ft_printf("%d",str[i++]);
+//    ft_printf("\n%d\n",16 + ((int) (0.3010299956639813 * (exponent - 1023 - 52))));
+    shift = 16 + ((int) (0.3010299956639813 * (exponent - 1023 - 52)));
+    int flag = 1;
+    i = 0;
+//    if ((*(uintmax_t *) (&nbr)) >> 63 == 1) {
+//        str[i++] = '-';
+//
+//    }
+    if (shift > 0) {
+
+        j = 0;
+
+        while (i < max_len && j < max_len){
+            if (flag && (str[j] == 0 || str[j] == '-')) {
+                j++;
+                continue;
+            }
+                flag = 0;
+                str[i++] = str[j++] + '0';
+                if (i == shift+1)
+                    str[i++] = '.';
+
+        }
+        while(i < max_len)
+            str[i++] = '0';
+        str[shift + 2 + param->precision] = 0;
+
+    }
+    else{
+
+        int count = 0;
+        str[i++]='0';
+        str[i++]='.';
+        while (count < - shift)
+        {
+            count++;
+            str[i++] = '0';
+        }
+        j = i;
+        while (i < max_len && j < max_len){
+            if ((str[j] == 0 || str[j] == '-' ) && flag )
+                j++;
+            else
+            {
+                flag = 0;
+                str[i++] = str[j++] + '0';
+
+            }
+        }
+        while(i < max_len)
+            str[i++] = '0';
+        str[2 + param->precision] = 0;
+    }
+
+    if ((*(uintmax_t *) (&nbr)) >> 63 == 1) {
+        i = max_len;
+        while (i--)
+            str[i + 1] = str[i];
+        str[0] = '-';
+    }
+        param->str = str;
+
+//        ft_printf("!%s", str);
+
+
     return 1;
 }

@@ -64,6 +64,8 @@ int apply_flags(t_param *param) {
 
     i = -1;
     space = ' ';
+    if (param->type == '%')
+        return 1;
     if (param->width > 0 && param->flag.zero && !param->flag.minus)
         space = '0';
     if (param->flag.hash) {

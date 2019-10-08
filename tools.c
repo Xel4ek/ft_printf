@@ -121,9 +121,9 @@ int	conversion(t_param *param)
 	if (param->type == 'f')
 	{
 		if (param->length == 0)
-			return ft_ftoa(va_arg(param->ap, double), param);//va_arg(param->ap,float)
+			return ft_dtoa(va_arg(param->ap, double), param);//va_arg(param->ap,float)
 		if (param->length == 'L' || param->length == 'l')
-			return 1;//va_arg(param->ap,long double)
+            return ft_dtoa(va_arg(param->ap, double), param);//va_arg(param->ap,float)
 	}
 	if (param->type == 's' )
 	{

@@ -55,7 +55,7 @@ int						ft_getchar(char c, t_param *param);
 
 char					*ft_strjoin(char const *s1, char const *s2);
 int						apply_flags(t_param *param);
-int						ft_ftoa(double nbr,t_param *param);
+int						ft_dtoa(double nbr,t_param *param);
 
 
 #endif
