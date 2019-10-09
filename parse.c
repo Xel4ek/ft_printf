@@ -15,9 +15,10 @@ t_param *get_param(t_param *new_param, char **str) {
         return (NULL);
     (*str)++;
     init_flag(&(new_param->flag));
+    new_param->sign = 0;
     while (get_flag((*str), &(new_param->flag)))
         (*str)++;
-    if ((new_param->width = get_width((*str))))
+    if ((new_param->width = get_width(*str, new_param)))
         (*str) += ft_nbrlen(new_param->width);
     if ((new_param->precision = get_precision((str))));//(*str) += ft_nbrlen(new_param->precision) + 1;
     if ((new_param->length = get_length((*str)))) {

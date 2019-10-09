@@ -2,7 +2,10 @@
 #include <unistd.h>
 
 int ft_getstr(char *str, t_param *param) {
-    param->str = ft_strjoin(param->str, str);
+    if (str)
+        param->str = ft_strjoin(param->str, str);
+    else
+        param->str = ft_strjoin(param->str, "(null)");
     return (1);
 }
 
@@ -10,9 +13,9 @@ int ft_getchar(char c, t_param *param) {
     free(param->str);
     if (!(param->str = malloc(sizeof(c) * 2)))
         return 0;
+//    param->str = ft_strjoin(param->str, &c);
     param->str[0] = c;
     param->str[1] = 0;
-
     return (1);
 }
 
@@ -61,14 +64,22 @@ int apply_flags(t_param *param) {
     int len;
     char *ptr;
     int i;
-
+    char *ptr_freeze;
     i = -1;
     space = ' ';
     if (param->type == '%')
         return 1;
     if (param->width > 0 && param->flag.zero && !param->flag.minus)
         space = '0';
-    if (param->flag.hash) {
+//    if(!(ptr_freeze = (char *) (malloc((param->width + 5) * sizeof(char)))))
+//        return 0;
+//    i = param->width + 5;
+//    while (i--)
+//        ptr_freeze[i] = 0;
+//    ptr = ptr_freeze;
+//    if (param->sign)
+//        *ptr='-';
+    if (param->flag.hash && *(param->str) != '0') {
         if (param->type == 'x')
             param->str = ft_strjoin("0x", param->str);
         else if (param->type == 'X')
@@ -80,7 +91,7 @@ int apply_flags(t_param *param) {
     if (param->type == 'd' || param->type == 'i')
         if (param->flag.plus && param->str[0] != '-')
             param->str = ft_strjoin("+", param->str);
-        else if (param->flag.space)
+        else if (param->flag.space && param->str[0] != '-')
             param->str = ft_strjoin(" ", param->str);
     len = ft_strlen(param->str);
     if (param->width == -1 || param->width < len)
@@ -90,7 +101,6 @@ int apply_flags(t_param *param) {
         while (i++ < param->width - len - 1)
             ptr[i] = space;
         ptr[i] = 0;
-
         if (param->flag.minus)
             param->str = ft_strjoin(param->str, ptr);
         else

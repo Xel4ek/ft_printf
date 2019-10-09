@@ -42,11 +42,11 @@ int get_flag(char *str,t_flag *flag)
 	return (1);
 }
 
-int get_width(char *str)
+int get_width(char *str, t_param *param)
 {
 	if (*str == '*')
-		return -1;
-	return atoi(str);
+		return va_arg(param->ap,int);
+	return ft_atoi(str);
 }
 
 int get_precision(char **str)
@@ -57,7 +57,7 @@ int get_precision(char **str)
 	{
 		(*str)++;
 		//printf("!was-->%c<--was!/n",**str);
-		tmp = (atoi(*str));
+		tmp = (ft_atoi(*str));
 		//printf("!was-->%c<--was!/n",**str);
 		while (**str >= '0' && **str <= '9')
 			(*str)++;
@@ -102,54 +102,81 @@ int	conversion(t_param *param)
 {
 	//print_param(param);
 	if (param->type == 'c')
-		return ft_getchar(va_arg(param->ap, int),param);
+		return ft_getchar((char)va_arg(param->ap, int),param);
 	if (param->type == 'd' || param->type == 'i')//iouxX')
 	{
 		if (param->length == 'h'+'h')
-			return (ft_itoa_p(va_arg(param->ap, int), param));//va_arg(param->ap,char)
+			return (ft_itoa_p((char)va_arg(param->ap, int), param));//va_arg(param->ap,char)
 		if (param->length == 'h')
-			return (ft_itoa_p(va_arg(param->ap, int), param));//va_arg(param->ap,short int)
+			return (ft_itoa_p((short int)va_arg(param->ap, int), param));//va_arg(param->ap,short int)
 		if (param->length == 0)
-			return (ft_itoa_p(va_arg(param->ap, int), param));
+			return (ft_itoa_p((int)va_arg(param->ap, int), param));
 		if (param->length == 'l')
-			return (ft_itoa_p(va_arg(param->ap, long int), param));;//va_arg(param->ap,long int)
+			return (ft_itoa_p((long int)va_arg(param->ap, long int), param));;//va_arg(param->ap,long int)
 		if (param->length == 'l'+'l')
-			return (ft_itoa_p(va_arg(param->ap, long long int), param));//va_arg(param->ap,long long int)
+			return (ft_itoa_p((long long int)va_arg(param->ap, long long int), param));//va_arg(param->ap,long long int)
 		if (param->length == 'z' || param->length =='t')
-			return (ft_itoa_p(va_arg(param->ap, size_t), param));//va_arg(param->ap,size_t)
+			return (ft_itoa_p((size_t)va_arg(param->ap, size_t), param));//va_arg(param->ap,size_t)
 	}
+    if (param->type == 'u')//iouxX')
+    {
+        if (param->length == 'h'+'h')
+            return (ft_itoa_p((unsigned char)va_arg(param->ap, unsigned int), param));//va_arg(param->ap,char)
+        if (param->length == 'h')
+            return (ft_itoa_p((unsigned short int)va_arg(param->ap, unsigned int), param));//va_arg(param->ap,short int)
+        if (param->length == 0)
+            return (ft_itoa_p((unsigned int)va_arg(param->ap, unsigned int), param));
+        if (param->length == 'l' ||  param->length == 'l'+'l')
+            return (ft_itoa_p((uintmax_t)va_arg(param->ap, uintmax_t), param));;//va_arg(param->ap,long int)
+//        if (param->length == 'l'+'l')
+//            return (ft_itoa_p((unsigned long long int)va_arg(param->ap, unsigned long long int), param));//va_arg(param->ap,long long int)
+        if (param->length == 'z' || param->length =='t')
+            return (ft_itoa_p((size_t)va_arg(param->ap, size_t), param));//va_arg(param->ap,size_t)
+    }
 	if (param->type == 'f')
 	{
 		if (param->length == 0)
-			return ft_dtoa(va_arg(param->ap, double), param);//va_arg(param->ap,float)
+			return ft_dtoa((float)va_arg(param->ap, double), param);//va_arg(param->ap,float)
 		if (param->length == 'L' || param->length == 'l')
-            return ft_dtoa(va_arg(param->ap, double), param);//va_arg(param->ap,float)
+            return ft_dtoa((double )va_arg(param->ap, double), param);//va_arg(param->ap,float)
 	}
 	if (param->type == 's' )
 	{
-		return (ft_getstr(va_arg(param->ap,char*), param));
+	    return (ft_getstr(va_arg(param->ap,char*), param));
 	}
 	if (param->type == 'p')
 	{
 		param->str = ft_strjoin("0x", param->str);
-		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_16l, param));
+		return (ft_itoa_b((size_t )va_arg(param->ap, size_t), BASE_16l, param));
 	}
 	if (param->type == 'X')
 	{
-		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_16u, param));
+        if (param->length == 'l')
+            return (ft_itoa_b((uintmax_t)va_arg(param->ap, unsigned long int), BASE_16u, param));
+        if (param->length == 'l'+'l')
+            return (ft_itoa_b((uintmax_t)va_arg(param->ap, uintmax_t), BASE_16u, param));
+        return (ft_itoa_b((uintmax_t)va_arg(param->ap, unsigned int), BASE_16u, param));
 	}
 	if (param->type == 'x')
 	{
-		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_16l, param));
+        if (param->length == 'l')
+            return (ft_itoa_b((uintmax_t)va_arg(param->ap, unsigned long int), BASE_16l, param));
+        if (param->length == 'l'+'l')
+            return (ft_itoa_b((uintmax_t)va_arg(param->ap, uintmax_t), BASE_16l, param));
+        return (ft_itoa_b((uintmax_t)va_arg(param->ap, unsigned int), BASE_16l, param));
 	}
 	if (param->type == 'o')
 	{
-		return (ft_itoa_b(va_arg(param->ap, long long int), BASE_8, param));
+	    if (param->length == 'h'+'h')
+            return (ft_itoa_b((unsigned char)va_arg(param->ap, int), BASE_8, param));//va_arg(param->ap,char)
+        if (param->length == 'h')
+            return (ft_itoa_b((unsigned short int)va_arg(param->ap, int), BASE_8, param));
+		return (ft_itoa_b((uintmax_t)va_arg(param->ap, intmax_t), BASE_8, param));
 	}
     if (param->type == 'b')
     {
        // param->str = ft_strjoin("0b", param->str);
-        return (ft_itoa_b(va_arg(param->ap, long long int), "01", param));
+        return (ft_itoa_b((uintmax_t)va_arg(param->ap, intmax_t), "01", param));
     }
 
 	return 0;

@@ -95,7 +95,7 @@ int ft_itoa_p(intmax_t nbr, t_param *param) {
     len_s = len;
     str[len] = 0;
     while (len--) {
-        str[len] = -nbr % 10 + '0';
+        str[len] = -(nbr % 10) + '0';
         nbr /= 10;
     }
     if (sign)

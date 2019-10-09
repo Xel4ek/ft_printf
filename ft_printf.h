@@ -26,6 +26,7 @@ typedef struct			s_param
 	int					precision;
 	int					printed;
 	char				*str;
+	unsigned char       sign;
 	t_flag				flag;
 	va_list				ap;
 
@@ -39,7 +40,7 @@ int						get_flag(char *str, t_flag *flag);
 int						get_precision(char **str);
 unsigned char			get_length(char *str);
 unsigned char			get_type(char *str);
-int						get_width(char *str);
+int						get_width(char *str, t_param *param);
 t_param					*get_param(t_param *new_param, char **str);
 void					print_param(t_param param);
 int						print_item(t_param *param);
