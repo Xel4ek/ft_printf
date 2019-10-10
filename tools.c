@@ -137,8 +137,10 @@ int	conversion(t_param *param)
 	{
 		if (param->length == 0)
 			return ft_dtoa((float)va_arg(param->ap, double), param);//va_arg(param->ap,float)
-		if (param->length == 'L' || param->length == 'l')
+		if (param->length == 'l')
             return ft_dtoa((double )va_arg(param->ap, double), param);//va_arg(param->ap,float)
+        if (param->length == 'L')
+            return ft_dtoa((double long)va_arg(param->ap, long double), param);//va_arg(param->ap,float)
 	}
 	if (param->type == 's' )
 	{

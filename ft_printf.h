@@ -33,9 +33,9 @@ typedef struct			s_param
 }						t_param;
 
 
-int 					ft_nbrlen(int nbr);
+int 					ft_nbrlen(long long int nbr);
 int						ft_printf(const char *format, ...);
-
+int                     ft_unbrlen(unsigned long long int nbr);
 int						get_flag(char *str, t_flag *flag);
 int						get_precision(char **str);
 unsigned char			get_length(char *str);
@@ -56,7 +56,7 @@ int						ft_getchar(char c, t_param *param);
 
 char					*ft_strjoin(char const *s1, char const *s2);
 int						apply_flags(t_param *param);
-int						ft_dtoa(double nbr,t_param *param);
+int						ft_dtoa(long double nbr,t_param *param);
 
 
 #endif

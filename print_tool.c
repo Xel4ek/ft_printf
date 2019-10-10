@@ -20,7 +20,15 @@ int ft_getchar(char c, t_param *param) {
 }
 
 
-int ft_nbrlen(int nbr) {
+int ft_nbrlen(long long int nbr) {
+    int len;
+
+    len = 1;
+    while (nbr /= 10)
+        len++;
+    return (len);
+}
+int ft_unbrlen(unsigned long long int nbr) {
     int len;
 
     len = 1;
