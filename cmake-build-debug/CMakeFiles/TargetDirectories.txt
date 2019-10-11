@@ -1,0 +1,6 @@
+/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir
+/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alexey/progects/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/rebuild_cache.dir
+/home/alexey/progects/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/libft.dir
+/home/alexey/progects/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/edit_cache.dir

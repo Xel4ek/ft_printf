@@ -6,6 +6,7 @@
 # include <string.h>
 # include <stdio.h>
 # include "libft.h"
+
 # define BASE_8 "01234567"
 # define BASE_16u "0123456789ABCDEF"
 # define BASE_16l "0123456789abcdef"
