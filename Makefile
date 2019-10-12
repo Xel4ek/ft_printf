@@ -18,7 +18,7 @@ $(NAME): $(OBJ)
 	ranlib $(NAME)
 
 $(OBJ):%.o:%.c
-	$(CC) $(FLAGS) -I$(HEADER) -o $@ -c $<
+	$(CC) $(FLAGS) -I$(HEADER) -I. -o $@ -c $<
 
 clean:
 	rm -f *.o

@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 # include <string.h>
-
+#include <limits.h>
 int	main()
 {
 
@@ -9,8 +9,9 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=.99e129l;
-
+	i=.99e-1129l;
+    int m;
+    m = 123;
 	int j =7;
 //	str = ft_strdup("%+0 #-123.56lld hwbuwadbujab wu !<was");
 	str = ft_strdup("%+test string");
@@ -19,9 +20,18 @@ int	main()
 //	print_param(&param);
 //	ft_printf("moulitest: %.x %.0X\n",i,i);
 
-    printf("(   %d) \n",ft_printf("%123.15Lf",1/i));
-    printf("(   %d) \n",printf("%123.15Lf",1/i));
-	// printf("(   %d) \n",ft_printf("%o\n",16));
+    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1444565444646.6465424242242454654, -1444565444646.6465424242242454654, -1444565444646.6465424242242454654l));
+
+
+    str = NULL;
+    printf("(   %d) \n",printf("{%f}{%lf}{%Lf}", -1444565444646.6465424242242454654, -1444565444646.6465424242242454654, -1444565444646.6465424242242454654l));
+
+    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
+
+
+    str = NULL;
+    printf("(   %d) \n",printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
+    // printf("(   %d) \n",ft_printf("%o\n",16));
 	//printf("(   %d) \n",printf("%f",i));
 	// print_param(param);
 //	ft_printf("\\n");

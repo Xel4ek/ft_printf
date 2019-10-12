@@ -28,8 +28,10 @@ typedef struct			s_param
 	int					printed;
 	char				*str;
 	unsigned char       sign;
+	int                 line_size;
 	t_flag				flag;
 	va_list				ap;
+
 
 }						t_param;
 
@@ -44,9 +46,9 @@ unsigned char			get_type(char *str);
 int						get_width(char *str, t_param *param);
 t_param					*get_param(t_param *new_param, char **str);
 void					print_param(t_param param);
-int						print_item(t_param *param);
+int						get_item(t_param *param);
 int						ft_printf(const char *format, ...);
-
+int                     ft_itoa_u(uintmax_t nbr, t_param *param);
 int						ft_itoa_x(uintmax_t nbr, char *_base);
 int						conversion(t_param *param);
 int						ft_itoa_p(intmax_t nbr, t_param *param);
@@ -54,10 +56,11 @@ int						ft_itoa_b(uintmax_t nbr, char *_base, t_param *param);
 int						nbr_length(intmax_t nbr, int base);
 int						 ft_getstr(char *str, t_param *param);
 int						ft_getchar(char c, t_param *param);
-
+void                    ft_putstring(const int fd, char *string, unsigned int size);
 char					*ft_strjoin(char const *s1, char const *s2);
 int						apply_flags(t_param *param);
 int						ft_dtoa(long double nbr,t_param *param);
+int                     nbr_length_u(uintmax_t nbr, int base);
 
 
 #endif

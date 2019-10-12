@@ -1,14 +1,14 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/libft.dir/src/ft_atoi.c.o"
   "CMakeFiles/libft.dir/src/ft_atoi_base.c.o"
+  "CMakeFiles/libft.dir/src/ft_atoi.c.o"
   "CMakeFiles/libft.dir/src/ft_bzero.c.o"
   "CMakeFiles/libft.dir/src/ft_isalnum.c.o"
   "CMakeFiles/libft.dir/src/ft_isalpha.c.o"
   "CMakeFiles/libft.dir/src/ft_isascii.c.o"
   "CMakeFiles/libft.dir/src/ft_isdigit.c.o"
   "CMakeFiles/libft.dir/src/ft_isprint.c.o"
-  "CMakeFiles/libft.dir/src/ft_itoa.c.o"
   "CMakeFiles/libft.dir/src/ft_itoa_base.c.o"
+  "CMakeFiles/libft.dir/src/ft_itoa.c.o"
   "CMakeFiles/libft.dir/src/ft_lstadd.c.o"
   "CMakeFiles/libft.dir/src/ft_lstappend.c.o"
   "CMakeFiles/libft.dir/src/ft_lstdel.c.o"
@@ -64,8 +64,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libft.dir/src/ft_tolower.c.o"
   "CMakeFiles/libft.dir/src/ft_toupper.c.o"
   "CMakeFiles/libft.dir/src/get_next_line.c.o"
-  "liblibft.a"
   "liblibft.pdb"
+  "liblibft.a"
 )
 
 # Per-language clean rules from dependency scanning.

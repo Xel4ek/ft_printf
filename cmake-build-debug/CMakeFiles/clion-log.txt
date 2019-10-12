@@ -1,4 +1,4 @@
-/snap/clion/88/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -G "CodeBlocks - Unix Makefiles" /home/alexey/progects/ft_printf
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/hwolf/progects/ft_printf
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/alexey/progects/ft_printf/cmake-build-debug
+-- Build files have been written to: /Users/hwolf/progects/ft_printf/cmake-build-debug

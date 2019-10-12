@@ -10,17 +10,29 @@ void init_flag(t_flag *flag) {
     flag->hash = 0;
 }
 
+void init_param(t_param *param)
+{
+    param->type = 0;
+    param->length= 0;
+    param->width = 0;
+    param->precision = -1;
+    param->str = NULL;
+    param->sign = 0;
+    param->line_size = 0;
+    init_flag(&(param->flag));
+
+}
+
 t_param *get_param(t_param *new_param, char **str) {
-    if (**str != '%')
-        return (NULL);
+//    if (**str != '%')
+//        return (NULL);
     (*str)++;
-    init_flag(&(new_param->flag));
-    new_param->sign = 0;
+    init_param(new_param);
     while (get_flag((*str), &(new_param->flag)))
         (*str)++;
     if ((new_param->width = get_width(*str, new_param)))
-        (*str) += ft_nbrlen(new_param->width);
-    if ((new_param->precision = get_precision((str))));//(*str) += ft_nbrlen(new_param->precision) + 1;
+        (*str) += ft_nbrlen(new_param->width); //only if valid
+    new_param->precision = get_precision((str));//(*str) += ft_nbrlen(new_param->precision) + 1;
     if ((new_param->length = get_length((*str)))) {
         if (new_param->length > 'z')
             (*str)++;

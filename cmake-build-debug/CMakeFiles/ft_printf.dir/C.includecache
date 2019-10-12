@@ -20,7 +20,7 @@ fcntl.h
 unistd.h
 -
 
-/home/alexey/progects/ft_printf/ft_printf.h
+/Users/hwolf/progects/ft_printf/ft_printf.h
 stdarg.h
 -
 stdlib.h
@@ -32,11 +32,11 @@ string.h
 stdio.h
 -
 libft.h
-/home/alexey/progects/ft_printf/libft.h
+/Users/hwolf/progects/ft_printf/libft.h
 
-/home/alexey/progects/ft_printf/main.c
+/Users/hwolf/progects/ft_printf/tools.c
 ft_printf.h
-/home/alexey/progects/ft_printf/ft_printf.h
-string.h
+/Users/hwolf/progects/ft_printf/ft_printf.h
+stdlib.h
 -
 

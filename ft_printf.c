@@ -10,21 +10,20 @@ int		ft_printf(const char *format, ...)
 	ptr = ft_strdup(format);
 	keep_ptr = ptr;
 	va_start(param.ap, format);
-	param.printed = 0;
+	int printed = 0;
 	while (*ptr)
 	{
 		while (*ptr != '%' && *ptr){
 			ft_putchar(*ptr++);
-			param.printed++;
+			printed++;
 		}
 		if (*ptr)
 		{
-			get_param(&param,&ptr);
-			// print_param(param);
-			print_item(&param);
+			if (get_param(&param,&ptr))
+                get_item(&param);
 			apply_flags(&param);
-			param.printed += ft_strlen(param.str);
-			ft_putstr(param.str);
+			printed += param.line_size;
+			ft_putstring(1, param.str, param.line_size);
 			// print_param(param);
 		}
 	}
@@ -40,5 +39,5 @@ int		ft_printf(const char *format, ...)
 		printf ("You passed c-string \"%s\"\n", p);
 	}
 */	va_end (param.ap);
-	return (param.printed);
+	return (printed);
 }

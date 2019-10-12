@@ -9,15 +9,14 @@ int nbr_length(intmax_t nbr, int base) {
     return len;
 }
 
-//int ft_strlen(const char *str)
-//{
-//	int count;
-//
-//	count =0;
-//	while (*str++)
-//		count++;
-//	return count;
-//}
+int nbr_length_u(uintmax_t nbr, int base) {
+    int len;
+
+    len = 1;
+    while (nbr /= base)
+        len++;
+    return len;
+}
 
 int ft_itoa_x(uintmax_t nbr, char *_base) {
     void *adr;
@@ -64,18 +63,59 @@ int ft_itoa_b(uintmax_t nbr, char *_base, t_param *param) {
     int base;
 
     base = ft_strlen(_base);
-    len = nbr_length(nbr, base);
+    len = nbr_length_u(nbr, base);
+    char *precition;
+    if (param->precision > len) {
+        precition = (char *) malloc(sizeof(*precition) * (param->precision - len + 1));
+        int i = 0;
+        param->line_size += param->precision - len;
+        while (i < param->precision - len)
+            precition[i++] = '0';
+        precition[i] = 0;
+        param->str = ft_strjoin(param->str, precition);
+    }
+//    param->line_size += len;
     len_s = len;
     str[len] = 0;
     while (len--) {
         str[len] = _base[nbr % base];
         nbr /= base;
     }
+    param->line_size += ft_strlen(str);
     param->str = ft_strjoin(param->str, str);
+
     // int i = 0;
     // while (i < 55)
     // 	param->str[i++] = '1';
     // param->str[55]=0;
+    return (len_s);
+}
+
+int ft_itoa_u(uintmax_t nbr, t_param *param) {
+    char str[64];
+    int len;
+    int len_s;
+    int sign;
+
+    len = nbr_length_u(nbr, 10);
+    char *precition;
+    if (param->precision > len) {
+        precition = (char *) malloc(sizeof(*precition) * (param->precision - len + 1));
+        int i = 0;
+        param->line_size += param->precision - len;
+        while (i < param->precision - len)
+            precition[i++] = '0';
+        precition[i] = 0;
+        param->str = ft_strjoin(param->str, precition);
+    }
+    param->line_size += len;
+    str[len] = 0;
+    while (len--) {
+        str[len] = (nbr % 10) + '0';
+        nbr /= 10;
+    }
+
+    param->str = ft_strjoin(param->str, str);
     return (len_s);
 }
 
@@ -85,24 +125,33 @@ int ft_itoa_p(intmax_t nbr, t_param *param) {
     int len_s;
     int sign;
 
-    sign = 1;
-    len = nbr_length(nbr, 10) + 1;
+    param->sign = 1;
+    len = nbr_length(nbr, 10);
     if (nbr >= 0) {
-        len--;
-        sign = 0;
+        param->sign = 0;
         nbr = -nbr;
     }
-    len_s = len;
+    char *precition;
+    if (param->precision > len) {
+        precition = (char *) malloc(sizeof(*precition) * (param->precision - len + 1));
+        int i = 0;
+        param->line_size += param->precision - len;
+        while (i < param->precision - len)
+            precition[i++] = '0';
+        precition[i] = 0;
+        param->str = ft_strjoin(param->str, precition);
+    }
+    param->line_size += len;
     str[len] = 0;
     while (len--) {
         str[len] = -(nbr % 10) + '0';
         nbr /= 10;
     }
-    if (sign)
-        *str = '-';
+
     param->str = ft_strjoin(param->str, str);
     return (len_s);
 }
+
 int ft_ceil(double nbr)
 {
     int inbr;
@@ -113,8 +162,9 @@ int ft_ceil(double nbr)
 }
 
 int ft_dtoa(long double nbr, t_param *param) {
-    if (param->precision == 0)
+    if (param->precision <= 0)
         param->precision = 6;
+
     void *adr;
     size_t size;
     char *str;
@@ -146,6 +196,8 @@ int ft_dtoa(long double nbr, t_param *param) {
     ft_memcpy(&mantissa, &nbr, sizeof(mantissa));
 //    printf("cast long: %lu\n",(long)(nbr));
     ft_memcpy(&exponent, (void *) (&nbr) + sizeof(exponent), sizeof(exponent));
+    param->sign = (exponent & 0x8000) >> 15;
+//    printf("sign %d",param->sign);
     exponent &= 0x7fff;
 //    printf("size mantissa: %ld\n", sizeof(exponent));
 
@@ -223,13 +275,22 @@ int ft_dtoa(long double nbr, t_param *param) {
         delta--;
     }
 
+ //   param->width -= param->precision;
+//   param->line_size += max_len - i  + 1;
+//    param->printed = max_len - i;
+    int k = 0;
+    char *ptr;
+    ptr = (char*)malloc(sizeof(*ptr)* max_len - i);
 
-    param->printed = max_len - i;
-    while (i < max_len-1) {
-        printf("%c", str[i++] + '0');
-        if (--delta == 0)
-            printf(".");
+    i++;
+    while (i < max_len - 1) {
+       ptr[k++] = str[i++] + '0';
+        if (--delta == 1)
+            ptr[k++] = '.';
     }
+    ptr[k] = 0;
 
+    param->str = ft_strjoin(param->str, ptr);
+    param->line_size = ft_strlen(ptr);
     return 1;
 }

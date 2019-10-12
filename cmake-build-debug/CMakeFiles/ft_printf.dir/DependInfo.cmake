@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/alexey/progects/ft_printf/ft_printf.c" "/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/ft_printf.c.o"
-  "/home/alexey/progects/ft_printf/main.c" "/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/main.c.o"
-  "/home/alexey/progects/ft_printf/numeric.c" "/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/numeric.c.o"
-  "/home/alexey/progects/ft_printf/parse.c" "/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/parse.c.o"
-  "/home/alexey/progects/ft_printf/print_tool.c" "/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/print_tool.c.o"
-  "/home/alexey/progects/ft_printf/tools.c" "/home/alexey/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/tools.c.o"
+  "/Users/hwolf/progects/ft_printf/ft_printf.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/ft_printf.c.o"
+  "/Users/hwolf/progects/ft_printf/main.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/main.c.o"
+  "/Users/hwolf/progects/ft_printf/numeric.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/numeric.c.o"
+  "/Users/hwolf/progects/ft_printf/parse.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/parse.c.o"
+  "/Users/hwolf/progects/ft_printf/print_tool.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/print_tool.c.o"
+  "/Users/hwolf/progects/ft_printf/tools.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/tools.c.o"
   )
-set(CMAKE_C_COMPILER_ID "GNU")
+set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
@@ -21,7 +21,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/alexey/progects/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/libft.dir/DependInfo.cmake"
+  "/Users/hwolf/progects/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/libft.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
