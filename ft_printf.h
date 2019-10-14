@@ -12,6 +12,15 @@
 # define BASE_8 "01234567"
 # define BASE_16u "0123456789ABCDEF"
 # define BASE_16l "0123456789abcdef"
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[0;32m"
+#define GREEN2   "\e[1;32;45m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\e[00m"
+
 typedef struct			s_flag
 {
 	unsigned char		minus;

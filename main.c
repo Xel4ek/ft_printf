@@ -21,7 +21,7 @@ int	main()
 //	print_param(&param);
 //	ft_printf("moulitest: %.x %.0X\n",i,i);
 
-    printf("(   %d) \n",ft_printf("%.*Le, %.40Lf",29, i, i));
+    printf("(   %d) \n",ft_printf(GREEN2 " %.*Le," GREEN " %.40Lf" RESET,29, i, i));
 
 
     str = NULL;
