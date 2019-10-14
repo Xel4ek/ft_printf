@@ -78,7 +78,7 @@ SRC =   ft_atoi_base.c  \
 
 
 
-SRC_DIR = src/
+SRC_DIR = src
 OBJ_DIR = ./
 HEADERS = includes
 

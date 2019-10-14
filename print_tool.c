@@ -6,10 +6,11 @@ int ft_getstr(char *str, t_param *param) {
     int len;
     if (param->precision < (len = ft_strlen(str)) && param->precision != -1)
         len = param->precision;
-    param->str = (char*)malloc(sizeof(*str)* (len + 1));
-    param->str[len] = 0;
-    if (str)
-      param->str = ft_strncpy(param->str, str, len);
+    if (str) {
+        param->str = (char *) malloc(sizeof(*str) * (len + 1));
+        param->str[len] = 0;
+        param->str = ft_strncpy(param->str, str, len);
+    }
     else
         param->str = ft_strjoin(param->str, "(null)");
     param->line_size = ft_strlen(param->str);
@@ -17,14 +18,9 @@ int ft_getstr(char *str, t_param *param) {
 }
 
 int ft_getchar(char c, t_param *param) {
-    free(param->str);
-    if (!(param->str = malloc(sizeof(c) * 2)))
-        return 0;
-//    param->str = ft_strjoin(param->str, &c);
     param->str[0] = c;
     param->str[1] = 0;
     param->line_size++;
-
     return (1);
 }
 
@@ -41,7 +37,7 @@ int ft_nbrlen(long long int nbr) {
         len++;
     return (len);
 }
-int ft_unbrlen(unsigned long long int nbr) {
+int ft_unbrlen(uintmax_t nbr) {
     int len;
 
     len = 1;
@@ -73,10 +69,6 @@ int get_item(t_param *param) {
         return conversion(param);
     if (param->type == 'o')
         return conversion(param);
-//	int i = va_arg(ap, int);
-//	printf("!_!_%d_!__!",i);
-    //print_param(param);
-//	printf("OK");
     return 0;
 }
 
@@ -86,7 +78,6 @@ int apply_flags(t_param *param) {
     char *ptr;
     int i;
     char prefix[] = {0, 0, 0};
-    char *ptr_freeze;
     i = -1;
     space = ' ';
     if (param->precision == 0 && (param->line_size == 1 && param->str[0] == '0')) {
@@ -132,8 +123,6 @@ int apply_flags(t_param *param) {
     len = param->line_size;
     if (param->width < len)
         param->width = len;
-//    if (param->width < param->precision)
-//        param->width = param->precision;
     if (len < param->width) {
         if (param->precision == -1)
             param->precision = param->width;
