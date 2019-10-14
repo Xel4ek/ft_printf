@@ -41,7 +41,7 @@ int 					ft_nbrlen(long long int nbr);
 int						ft_printf(const char *format, ...);
 int                     ft_unbrlen(uintmax_t nbr);
 int						get_flag(const char *str, t_flag *flag);
-int						get_precision(char **str);
+int						get_precision(char **str, t_param *param);
 unsigned char			get_length(const char *str);
 unsigned char			get_type(const char *str);
 int						get_width(char *str, t_param *param);
@@ -61,6 +61,6 @@ void                    ft_putstring(const int fd, char *string, unsigned int si
 int						apply_flags(t_param *param);
 int						ft_dtoa(long double nbr,t_param *param);
 int                     nbr_length_u(uintmax_t nbr, int base);
-
+int                     ft_dtoa_e(long double nbr, t_param *param);
 
 #endif

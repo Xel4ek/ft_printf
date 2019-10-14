@@ -30,7 +30,7 @@ t_param *get_param(t_param *new_param, char **str) {
         (*str)++;
     if ((new_param->width = get_width(*str, new_param)))
         (*str) += ft_nbrlen(new_param->width);
-    new_param->precision = get_precision((str));
+    new_param->precision = get_precision(str, new_param);
     if ((new_param->length = get_length((*str)))) {
         if (new_param->length > 'z')
             (*str)++;
@@ -69,13 +69,17 @@ int get_width(char *str, t_param *param)
     return ft_atoi(str);
 }
 
-int get_precision(char **str)
+int get_precision(char **str, t_param *param)
 {
     int tmp;
 
     if (**str == '.')
     {
         (*str)++;
+        if (**str == '*'){
+            (*str)++;
+            return ((unsigned int)va_arg(param->ap, int));
+        }
         tmp = (ft_atoi(*str));
         while (**str >= '0' && **str <= '9')
             (*str)++;
@@ -111,7 +115,8 @@ unsigned char get_type(const char *str)
 {
     if (*str == '%' || *str== 'd' || *str== 'i' || *str== 'u' ||
         *str == 'c' || *str== 's' || *str== 'p' || *str== 'x' ||
-        *str== 'X' || *str == 'f' || *str == 'o' || *str == 'b')
+        *str== 'X' || *str == 'f' || *str == 'o' || *str == 'b' ||
+        *str =='e')
         return (*(unsigned char*)str);
     return(0);
 }

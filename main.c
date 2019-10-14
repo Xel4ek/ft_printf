@@ -1,6 +1,7 @@
 #include "ft_printf.h"
 # include <string.h>
 #include <limits.h>
+
 int	main()
 {
 
@@ -9,7 +10,7 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=.99e-1129l;
+	i=-5.99e+4l;
     int m;
     m = 123;
 	int j =7;
@@ -20,17 +21,22 @@ int	main()
 //	print_param(&param);
 //	ft_printf("moulitest: %.x %.0X\n",i,i);
 
-    printf("(   %d) \n",ft_printf("%.0p, %.p", 0, 0));
+    printf("(   %d) \n",ft_printf("%.*Le, %.40Lf",29, i, i));
 
 
     str = NULL;
-    printf("(   %d) \n",printf("%.0p, %.p", 0, 0));
+    printf("(   %d) \n",printf("%.29Lg, %.6Lg", i, i*10));
 
     printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
 
 
     str = NULL;
     printf("(   %d) \n",printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
+    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l));
+
+
+    str = NULL;
+    printf("(   %d) \n",printf("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l));
     // printf("(   %d) \n",ft_printf("%o\n",16));
 	//printf("(   %d) \n",printf("%f",i));
 	// print_param(param);

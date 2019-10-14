@@ -40,11 +40,18 @@ int	conversion(t_param *param)
     }
 	if (param->type == 'f')
 	{
-		if (param->length == 'l' || param->length == 0 )
-            return ft_dtoa((double )va_arg(param->ap, double), param);//va_arg(param->ap,float)
+	    if (param->length == 'l' || param->length == 0 )
+            return ft_dtoa((long double )va_arg(param->ap, double), param);//va_arg(param->ap,float)
         if (param->length == 'L')
-            return ft_dtoa((double long)va_arg(param->ap, long double), param);//va_arg(param->ap,float)
+            return ft_dtoa((long double)va_arg(param->ap, long double), param);//va_arg(param->ap,float)
 	}
+	if (param->type == 'e')
+    {
+        if (param->length == 'l' || param->length == 0 )
+            return ft_dtoa_e((long double )va_arg(param->ap, double), param);//va_arg(param->ap,float)
+        if (param->length == 'L')
+            return ft_dtoa_e((long double)va_arg(param->ap, long double), param);
+    }
 	if (param->type == 's' )
 	{
 	    return (ft_getstr(va_arg(param->ap,char*), param));

@@ -69,6 +69,8 @@ int get_item(t_param *param) {
         return conversion(param);
     if (param->type == 'o')
         return conversion(param);
+    if (param->type == 'e')
+        return conversion(param);
     return 0;
 }
 
