@@ -55,7 +55,7 @@ int ft_itoa_b(uintmax_t nbr, char *_base, t_param *param) {
 }
 
 int ft_itoa_u(uintmax_t nbr, t_param *param) {
-    return ft_itoa_b(nbr, "0123456789", param);
+    return ft_itoa_b(nbr, BASE_10, param);
 }
 
 int ft_itoa_p(intmax_t nbr, t_param *param) {
@@ -64,7 +64,7 @@ int ft_itoa_p(intmax_t nbr, t_param *param) {
         param->sign = 1;
         nbr = -nbr;
     }
-    return ft_itoa_b(nbr, "0123456789", param);
+    return ft_itoa_b(nbr, BASE_10, param);
 }
 
 intmax_t ft_ceil(long double nbr)
@@ -130,6 +130,7 @@ int ft_dtoa(long double nbr, t_param *param) {
     len = 20;// ft_unbrlen(mantissa);
     i =  (int)(exponent) - (int)(1 << 14) - 62;
     int delta;
+    //TODO add ceil realization
     delta  = (int)ceill(len + ((double)i)*0.3010299956639812);
 //    printf("\ndelta : %d",delta);
 //    printf("\nlen : %d",len);
@@ -206,6 +207,7 @@ int ft_dtoa(long double nbr, t_param *param) {
     param->line_size = ft_strlen(ptr);
     return 1;
 }
+
 int ft_dtoa_e(long double nbr, t_param *param) {
     if (param->precision < 0)
         param->precision = 6;

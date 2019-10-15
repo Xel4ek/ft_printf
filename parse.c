@@ -28,15 +28,16 @@ t_param *get_param(t_param *new_param, char **str) {
     init_param(new_param);
     while (get_flag((*str), &(new_param->flag)))
         (*str)++;
-    if ((new_param->width = get_width(*str, new_param)))
-        (*str) += ft_nbrlen(new_param->width);
+    (*str) += get_width(*str, new_param);
     new_param->precision = get_precision(str, new_param);
     if ((new_param->length = get_length((*str)))) {
         if (new_param->length > 'z')
             (*str)++;
         (*str)++;
     }
-    if (!(new_param->type = get_type((*str))))
+    while (**str && !(new_param->type = get_type(*str)))
+        (*str)++;
+    if (!(new_param->type))
         return (NULL);
     new_param->str = (char *) malloc(2);
     *(new_param->str) = 0;
@@ -64,9 +65,27 @@ int get_flag(const  char *str, t_flag *flag)
 
 int get_width(char *str, t_param *param)
 {
-    if (*str == '*')
-        return va_arg(param->ap, int);
-    return ft_atoi(str);
+    int width;
+    int next;
+
+    next =0;
+    if (*str == '*') {
+        str++;
+        width = va_arg(param->ap, int);
+        if (width < 0)
+        {
+            param->flag.minus = 1;
+            param->width = -width;
+        }
+        else
+            param->width = width;
+        next = 1;
+    }
+    if ((width = ft_atoi(str))) {
+        param->width = width;
+        next = param->width ? ft_nbrlen(param->width) : 0;
+    }
+    return (next);
 }
 
 int get_precision(char **str, t_param *param)
@@ -78,7 +97,8 @@ int get_precision(char **str, t_param *param)
         (*str)++;
         if (**str == '*'){
             (*str)++;
-            return ((unsigned int)va_arg(param->ap, int));
+            tmp  =(int)va_arg(param->ap, int);
+            return (tmp < 0 ? -1 : tmp);
         }
         tmp = (ft_atoi(*str));
         while (**str >= '0' && **str <= '9')

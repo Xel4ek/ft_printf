@@ -12,6 +12,8 @@ HEADER = lib/libft/includes
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	cp lib/libft/libft.a libft.a
+	ar x libft.a
 	ar rc $(NAME) $(LIB_OBG) *.o
 	ranlib $(NAME)
 

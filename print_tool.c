@@ -100,7 +100,7 @@ int apply_flags(t_param *param) {
         }
         else if (param->line_size > 0) {
             prefix[0] = '0';
-            prefix[1] = param->type;
+            prefix[1] = (char)param->type;
            param->line_size += 2;
         }
 
@@ -137,6 +137,8 @@ int apply_flags(t_param *param) {
                 ptr[i] = ' ';
         }
         ptr[i] = 0;
+        //TODO add 0 str management
+        char *tmp;
         if (param->flag.minus)
             param->str = ft_strjoin(ft_strjoin(prefix, param->str), ptr);
         else if (param->flag.zero)
