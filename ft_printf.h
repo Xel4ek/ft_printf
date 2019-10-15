@@ -7,9 +7,11 @@
 # include <string.h>
 # include <stdio.h>
 //# include "libft.h"
+# include <math.h>
 
 
 # define BASE_8 "01234567"
+# define BASE_10 "0123456789"
 # define BASE_16u "0123456789ABCDEF"
 # define BASE_16l "0123456789abcdef"
 #define RED     "\x1b[31m"
@@ -71,5 +73,5 @@ int						apply_flags(t_param *param);
 int						ft_dtoa(long double nbr,t_param *param);
 int                     nbr_length_u(uintmax_t nbr, int base);
 int                     ft_dtoa_e(long double nbr, t_param *param);
-
+int                     ft_ceil(double nbr);
 #endif

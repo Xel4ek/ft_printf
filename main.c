@@ -28,9 +28,9 @@ int	main()
 //	get_param(&param, &str);
 //	print_param(&param);
 //	ft_printf("moulitest: %.x %.0X\n",i,i);
-
+    ft_printf("%d\n", ft_ceil(0.0000001));
     printf("(   %d) \n",ft_printf("{%*c}", -15, 'e'));
-    printf("(   %d) \n",printf("{%*s}", -15, ""));
+    printf("(   %d) \n",printf("{%*s}", -15, "e"));
 //
 //    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
 //

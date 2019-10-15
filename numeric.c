@@ -1,5 +1,14 @@
 #include "ft_printf.h"
-# include <math.h>
+
+
+int ft_ceil(double nbr)
+{
+    int inbr;
+    if (nbr - (inbr = (int)nbr) > .0)
+        return inbr + 1;
+    return inbr;
+}
+
 int nbr_length(intmax_t nbr, int base) {
     int len;
 
@@ -67,15 +76,6 @@ int ft_itoa_p(intmax_t nbr, t_param *param) {
     return ft_itoa_b(nbr, BASE_10, param);
 }
 
-intmax_t ft_ceil(long double nbr)
-{
-    intmax_t inbr;
-    inbr = (int)nbr;
-    if (nbr == (long double)inbr)
-        return inbr;
-    return inbr + 1;
-}
-
 int ft_dtoa(long double nbr, t_param *param) {
     if (param->precision < 0)
         param->precision = 6;
@@ -131,7 +131,7 @@ int ft_dtoa(long double nbr, t_param *param) {
     i =  (int)(exponent) - (int)(1 << 14) - 62;
     int delta;
     //TODO add ceil realization
-    delta  = (int)ceill(len + ((double)i)*0.3010299956639812);
+    delta  = ft_ceil(len + ((double)i)*0.3010299956639812);
 //    printf("\ndelta : %d",delta);
 //    printf("\nlen : %d",len);
     max_len = param->precision + (delta > 0 ? delta: 0) + len + 1;
@@ -263,7 +263,7 @@ int ft_dtoa_e(long double nbr, t_param *param) {
     i =  (int)(exponent) - (int)(1 << 14) - 62;
 //    printf("\n%d\n",i);
     int delta;
-    delta  = (int)ceill((long double)len + ((long double)i)*0.301029995663981198017467022509663365781307220458984375);
+    delta  = ft_ceil((long double)len + ((long double)i)*0.301029995663981198017467022509663365781307220458984375);
 
     int power = delta - 2;
 //    printf("\ndelta : %d",delta);
