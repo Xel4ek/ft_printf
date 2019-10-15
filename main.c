@@ -18,7 +18,8 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=-5.9312312312312312e-12;
+	i=-3.999999999999000999e12l;
+
     int m;
     m = 112323;
 	int j =7;
@@ -28,9 +29,28 @@ int	main()
 //	get_param(&param, &str);
 //	print_param(&param);
 //	ft_printf("moulitest: %.x %.0X\n",i,i);
-    ft_printf("%d\n", ft_ceil(0.0000001));
-    printf("(   %d) \n",ft_printf("{%*c}", -15, 'e'));
-    printf("(   %d) \n",printf("{%*s}", -15, "e"));
+//    ft_printf("%d\n", ft_ceil(0.0000001));
+//    printf("(   %d) \n",ft_printf("{%.*Lf}", 17, i));
+//    printf("(   %d) \n",printf("{%.*Lf}", 17, i));
+    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
+    printf("(   %d) \n",printf("{%.17Lf}", i));
+    i *= 10;
+    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
+    printf("(   %d) \n",printf("{%.17Lf}", i));
+    i *= 10;
+    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
+    printf("(   %d) \n",printf("{%.17Lf}", i));
+    i *= 10;
+    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
+    printf("(   %d) \n",printf("{%.17Lf}", i));
+    i *= 10;
+    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
+    printf("(   %d) \n",printf("{%.17Lf}", i));
+    i *= 10;
+
+
+
+
 //
 //    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
 //
