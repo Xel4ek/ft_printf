@@ -64,6 +64,7 @@ set(SRC
         src/ft_strtrim.c
         src/ft_tolower.c
         src/ft_toupper.c
+        src/ft_memjoin.c
         src/get_next_line.c)
 set(HEADERS includes/libft.h)
 add_library(libft STATIC ${SRC} ${HEADERS})
