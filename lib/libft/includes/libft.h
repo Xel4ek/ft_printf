@@ -105,5 +105,6 @@ void				ft_sort_str_table(char **tab, int size);
 int					get_next_line(const int fd, char **line);
 t_list				*ft_lstappend(t_list *head, t_list *new);
 void				ft_lst_del(t_list **alst);
+char	            *ft_memjoin(void const *src1, void const *src2, size_t size1, size_t size2);
 
 #endif

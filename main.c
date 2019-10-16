@@ -2,14 +2,6 @@
 # include <string.h>
 #include <limits.h>
 
-//TODO
-/*
- * manage %r %k
- * manage skip wrong letters in flag
- * make self ceil function
- *
- * */
-
 int	main()
 {
 
@@ -18,13 +10,13 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=-3.999999999999000999e12l;
+	i=-1.00000000000000000000e-2l;
 
     int m;
     m = 112323;
 	int j =7;
 //	str = ft_strdup("%+0 #-123.56lld hwbuwadbujab wu !<was");
-	str = ft_strdup("%+test string");
+//	str = ft_strdup("%+test string");
 //	printf("%s\n",str)
 //	get_param(&param, &str);
 //	print_param(&param);
@@ -32,23 +24,12 @@ int	main()
 //    ft_printf("%d\n", ft_ceil(0.0000001));
 //    printf("(   %d) \n",ft_printf("{%.*Lf}", 17, i));
 //    printf("(   %d) \n",printf("{%.*Lf}", 17, i));
-    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
-    printf("(   %d) \n",printf("{%.17Lf}", i));
-    i *= 10;
-    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
-    printf("(   %d) \n",printf("{%.17Lf}", i));
-    i *= 10;
-    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
-    printf("(   %d) \n",printf("{%.17Lf}", i));
-    i *= 10;
-    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
-    printf("(   %d) \n",printf("{%.17Lf}", i));
-    i *= 10;
-    printf("(   %d) \n",ft_printf("{%.17Lf}", i));
-    printf("(   %d) \n",printf("{%.17Lf}", i));
-    i *= 10;
-
-
+    printf("(   %d) \n",ft_printf("{%s}", "jasdasdasdasdasdasdasdasdasdaasdddddddddddddddddddddddddddddddddddddddddddddddddddddasdkajksndka\0as123123da"));
+    printf("(   %d) \n",printf("{%s}", "jasdkajksndka\0asda"));
+    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
+    printf("(   %d) \n",ft_printf("{%e}{%le}{%Le}", -1.42, -1.42, -1.42l));
+    printf("(   %d) \n",ft_printf("{%d}{%ld}{%lld}", -42, -42l, -42l));
+    printf("(   %d) \n",ft_printf("{%*c}{%c}{%c}",-15, 0 ,0 , 0));
 
 
 //

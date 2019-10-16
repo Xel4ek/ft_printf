@@ -1,6 +1,5 @@
 #include "ft_printf.h"
-
-# include <stdio.h>
+//# include <stdio.h>
 
 void init_flag(t_flag *flag) {
     flag->minus = 0;
@@ -39,7 +38,8 @@ t_param *get_param(t_param *new_param, char **str) {
         (*str)++;
     if (!(new_param->type))
         return (NULL);
-    new_param->str = (char *) malloc(2);
+    if (!(new_param->str = (char *) malloc(2)))
+        return (NULL);
     *(new_param->str) = 0;
     (*str)++;
     return (new_param);
@@ -88,7 +88,7 @@ int get_width(char *str, t_param *param)
     return (next);
 }
 
-int get_precision(char **str, t_param *param)
+int  get_precision(char **str, t_param *param)
 {
     int tmp;
 
