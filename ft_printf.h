@@ -15,6 +15,8 @@
 # define BASE_16u "0123456789ABCDEF"
 # define BASE_16l "0123456789abcdef"
 # define LOG2 0.3010299956639812
+# define BASE_NBR_LEN 20
+# define DEFAULT_PRECISION 6
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[0;32m"
 #define GREEN2   "\e[1;32;45m"

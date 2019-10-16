@@ -74,6 +74,7 @@ SRC =   ft_atoi_base.c  \
         ft_strtrim.c  \
         ft_tolower.c  \
         ft_toupper.c  \
+        ft_memjoin.c \
         get_next_line.c  \
 
 
