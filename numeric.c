@@ -126,7 +126,7 @@ void calculate_number(char *str, int max_len, intmax_t exponent) {
             multiply_two(str, max_len);
 }
 
-void write_rezult(t_param *param, char *str, int max_len, int delta) {
+void write_rezult(t_param *param, char *str, int max_len, int delta,long double nbr ) {
     int i;
     int k;
     char *temp;
@@ -134,10 +134,10 @@ void write_rezult(t_param *param, char *str, int max_len, int delta) {
 
     k = 0;
     i = BASE_NBR_LEN - 1;
-//    if ((int)nbr != 0 && str[i] == 0) {
-//        i++;
-//        delta--;
-//    }
+    if (nbr !=0 &&str[i] == 0) {
+        i++;
+        delta--;
+    }
     if (delta < 1)
         delta = 1;
     while (i < max_len - 1) {
@@ -152,7 +152,7 @@ void write_rezult(t_param *param, char *str, int max_len, int delta) {
     param->line_size = ft_strlen(ptr);
 }
 
-void ft_dtoa_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t exponent, int power)
+void ft_dtoa_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t exponent, int power, long double nbr)
 {
     int i;
     char str[max_len + 1];
@@ -165,7 +165,7 @@ void ft_dtoa_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t ex
         mantissa /= 10;
     }
     calculate_number(str, max_len, exponent);
-    write_rezult(param, str, max_len, power + 1);
+    write_rezult(param, str, max_len, power + 1, nbr);
 }
 
 int ft_dtoa(long double nbr, t_param *param) {
@@ -184,7 +184,7 @@ int ft_dtoa(long double nbr, t_param *param) {
     delta = 2 + (int)floorl(log10l(fabsl(nbr)));
     power = delta - 2;
     max_len = param->precision + (power > 0 ? power : 0) + BASE_NBR_LEN + 1;
-    ft_dtoa_helper(param, max_len, mantissa, exponent, power);
+    ft_dtoa_helper(param, max_len, mantissa, exponent, power, nbr);
     return 1;
 }
 
@@ -269,16 +269,15 @@ void division_two_e(t_param *param, char *str, int max_len, int i)
 
     j = max_len;
     while (j--) {
-
         str[j + 1] += (str[j] % 2) * 5;
         str[j] /= 2;
         if (str[j + 1] > 9) {
             str[j + 1] %= 10;
             str[j]++;
         }
-        if (i == 0 && j == param->precision + BASE_NBR_LEN - 1)
-            if (str[j + 1] > 5)
-                str[j]++;
+//        if (i == 0 && j == param->precision + BASE_NBR_LEN - 1)
+//            if (str[j + 1] > 5)
+//                str[j]++;
     }
 }
 
@@ -291,25 +290,73 @@ void multiply_two_e(t_param *param, char *str, int max_len, int i)
     in_main = 0;
     while (j-- > 0) {
         str[j] = 2 * str[j] + in_main;
-        if (i == 0 && j == param->precision + BASE_NBR_LEN - 1)
-            if (str[j + 1] > 5)
-                str[j]++;
+//        if (i == 0 && j == param->precision + BASE_NBR_LEN - 1)
+//            if (str[j + 1] > 5)
+//                str[j]++;
         in_main = str[j] / 10;
         str[j] %= 10;
     }
 }
 
+int shift_string(char *str, int max_len) {
+    int j;
+    int count;
+    j = 0;
+    count = 0;
+    while (j < max_len) {
+
+        if (str[j++] != 0)
+            break;
+        count++;
+    }
+
+    if (--count > 0) {
+        j = 0;
+        while (j++ < max_len - count) {
+            str[j] = str[j + count];
+        }
+        while (j < max_len + 1)
+            str[j++] = 0;
+        return count;
+    }
+    return 0;
+}
+
 void calculate_number_e(t_param *param, char *str, int max_len, intmax_t exponent)
 {
     int i;
-
+    int j;
+    int k;
+    int count;
+    static int super = 0;
     i = (int) (exponent) - (int) (1 << 14) - 62;
-    if (i < 0)
-        while (i++)
+    if (i < 0) {
+        while (i++) {
+            super += shift_string(str, max_len + 1);
+//            j = 0;
+//            count =0;
+//           while (j < max_len) {
+//
+//                if (str[j++] != 0)
+//                    break ;
+//               count++;
+//                }
+//
+//           if (--count > 0) {
+//               j = 0;
+//               while (j++ < max_len - count) {
+//                   str[j] = str[j + count];
+//               }
+//               while (j < max_len + 1)
+//                   str[j++] = 0;
+//                super += count;
+//               printf("\ncount: %d\n", super - 17 +2);
             division_two_e(param, str, max_len, i);
-     else
+        }
+    }else
         while (i--)
             multiply_two_e(param, str, max_len, i);
+
 }
 void add_exponent(t_param *param, int power)
 {
@@ -343,15 +390,29 @@ void write_rezult_e(t_param *param, char *str, int max_len, int power)
 //    char *temp3;
 //    char *temp2;
     char *temp;
+    int j;
 
 
-
-    i = BASE_NBR_LEN - 1;
+    i = 1 ;
     delta = 1;
     k = 0;
+    power -= shift_string(str, max_len);
+    j = max_len;
+    while (j--) {
+//        if (j == param->precision + 4)
+//            str[j] = 'e' -'0';
+//            if (str[j] > 5)
+//                str[j - 1]++;
+//        if (str[j] > 9) {
+//            str[j - 1]++;
+//            str[j] %= 10;
+//        }
 
-    while (i < param->precision + BASE_NBR_LEN ) {
-        ptr[k++] = str[i++ - (power < 0 ? power : 0)] + '0';
+    }
+//    power -= shift_string(str, max_len);
+
+    while (i < max_len + 1) {
+        ptr[k++] = str[i++ ] + '0';
         if (--delta == 0)
             ptr[k++] = '.';
     }
@@ -359,6 +420,7 @@ void write_rezult_e(t_param *param, char *str, int max_len, int power)
     temp = ft_strjoin(param->str, ptr);
     ft_memdel((void **) &param->str);
     param->str = temp;
+    param->line_size = ft_strlen(param->str);
 //    if (power >= 0)
 //        prefix[1] = '+';
 //    else
@@ -373,7 +435,7 @@ void write_rezult_e(t_param *param, char *str, int max_len, int power)
 //    ft_memdel((void **) &temp);
 //    param->str = temp2;
 //    param->line_size = ft_strlen(param->str);
-    add_exponent(param, power);
+  //  add_exponent(param, power);
 }
 
 void ft_dtoa_e_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t exponent, int power)
@@ -381,10 +443,7 @@ void ft_dtoa_e_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t 
     int i;
     char str[max_len + 1];
 
-    i = 0;
-    while (i < max_len)
-        str[i++] = 0;
-    i = BASE_NBR_LEN + (power > 0 ? power : 0);
+    i = max_len;
     while (i--) {
         str[i] = mantissa % 10;
         mantissa /= 10;
@@ -392,6 +451,23 @@ void ft_dtoa_e_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t 
     calculate_number_e(param, str,  max_len, exponent);
     write_rezult_e(param, str, max_len, power);
 }
+
+//void ft_dtoa_e_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t exponent, int power)
+//{
+//    int i;
+//    char str[max_len + 1];
+//
+//    i = 0;
+//    while (i < max_len)
+//        str[i++] = 0;
+//    i = BASE_NBR_LEN + (power > 0 ? power : 0);
+//    while (i--) {
+//        str[i] = mantissa % 10;
+//        mantissa /= 10;
+//    }
+//    calculate_number_e(param, str,  max_len, exponent);
+//    write_rezult_e(param, str, max_len, power);
+//}
 
 int ft_dtoa_e(long double nbr, t_param *param) {
     int delta;
@@ -406,7 +482,24 @@ int ft_dtoa_e(long double nbr, t_param *param) {
     param->sign = (exponent & 0x8000) >> 15;
     exponent &= 0x7fff;
     delta = 2 + (int)floorl(log10l(fabsl(nbr)));
-    max_len = param->precision + abs(delta - 2) + BASE_NBR_LEN;
+    max_len = param->precision + 7;
     ft_dtoa_e_helper(param, max_len, mantissa, exponent, delta - 2);
     return 1;
 }
+//int ft_dtoa_e(long double nbr, t_param *param) {
+//    int delta;
+//    int max_len;
+//    uintmax_t mantissa;
+//    intmax_t exponent;
+//
+//    if (param->precision < 0)
+//        param->precision = DEFAULT_PRECISION;
+//    ft_memcpy(&mantissa, &nbr, sizeof(mantissa));
+//    ft_memcpy(&exponent, (void *) (&nbr) + sizeof(mantissa), sizeof(exponent));
+//    param->sign = (exponent & 0x8000) >> 15;
+//    exponent &= 0x7fff;
+//    delta = 2 + (int)floorl(log10l(fabsl(nbr)));
+//    max_len = param->precision + abs(delta - 2) + BASE_NBR_LEN;
+//    ft_dtoa_e_helper(param, max_len, mantissa, exponent, delta - 2);
+//    return 1;
+//}
