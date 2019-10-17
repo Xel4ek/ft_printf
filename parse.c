@@ -136,7 +136,7 @@ unsigned char get_type(const char *str)
     if (*str == '%' || *str== 'd' || *str== 'i' || *str== 'u' ||
         *str == 'c' || *str== 's' || *str== 'p' || *str== 'x' ||
         *str== 'X' || *str == 'f' || *str == 'o' || *str == 'b' ||
-        *str =='e')
+        *str =='e' || *str =='k')
         return (*(unsigned char*)str);
     return(0);
 }

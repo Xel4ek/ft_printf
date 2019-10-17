@@ -77,6 +77,8 @@ int get_item(t_param *param) {
         return conversion(param);
     if (param->type == 'e')
         return conversion(param);
+    if (param->type == 'k')
+        return conversion(param);
     return 0;
 }
 
@@ -98,8 +100,6 @@ int apply_flags(t_param *param) {
     if (param->type == 'p'){
         prefix[0] = '0';
         prefix[1] = 'x';
-//        param->str = ft_strjoin("0x", param->str);
-//        param->line_size += 2;
     }
     if (param->flag.hash && ((param->type == 'X' || param->type == 'x' || param->type =='o' ) && !(param->str[0] == '0' && param->line_size == 1))) {
 

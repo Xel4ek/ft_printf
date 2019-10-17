@@ -7,7 +7,6 @@ int		ft_printf(const char *format, ...)
 	char *ptr;
 	t_param param;
 	ptr = (char*)format;
-//	char *keep_ptr = ptr;
 	va_start(param.ap, format);
 	int printed = 0;
 	while (*ptr)
@@ -26,7 +25,6 @@ int		ft_printf(const char *format, ...)
 			ft_memdel((void**)&param.str);
 		}
 	}
-//    ft_memdel((void**)&keep_ptr);
 	va_end (param.ap);
 	return (printed);
 }

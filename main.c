@@ -10,7 +10,7 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=-0.0000009999999999999999998099990e-1212l;
+	i=-0.0000009999999999999999998099990e-1121l;
 
     int m;
     m = 112323;
@@ -27,13 +27,15 @@ int	main()
 //    printf("(   %d) \n",ft_printf("{%s}", "jasdasdasdasdasdasdasdasdasdaasdddddddddddddddddddddddddddddddddddddddddddddddddddddasdkajksndka\0as123123da"));
 //    printf("(   %d) \n",printf("{%s}", "jasdkajksndka\0asda"));
 //    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
-    printf("(   %d) \n",ft_printf("{%.35Le}", i));
-    printf("(   %d) \n",printf("{%.35Le}", i));
-    printf("(   %d) \n",ft_printf("{%.19Lf}", i));
-    printf("(   %d) \n",printf("{%.19Lf}", i));
-    printf("(   %d) \n",ft_printf("{%d}{%ld}{%lld}", -42, -42l, -42l));
-    printf("(   %d) \n",ft_printf("{%*c}{%c}{%c}",-15, 0 ,0 , 0));
+//    printf("(   %d) \n",ft_printf("{%.5Le}", i));
+//    printf("(   %d) \n",printf("{%.5Le}", i));
+//    printf("(   %d) \n",ft_printf("{%.1900Lf}", i));
+//    printf("(   %d) \n",printf("{%.1900Lf}", i));
+    printf("(   %d) \n",ft_printf("{%*c}", 15, 0));
+    printf("(   %d) \n",printf("{%*c}", 15, 0));
+    printf("%4$d:%2$.*1$d:%4$.*3$d\n", 12, 13, 15, 16);
 
+    printf("(   %d) \n",ft_printf("{%#-123k}", "1232-11-21"));
 
 //
 //    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));

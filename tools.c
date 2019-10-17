@@ -97,5 +97,10 @@ int	conversion(t_param *param)
     {
          return (ft_itoa_b((uintmax_t)va_arg(param->ap, intmax_t), "01", param));
     }
+    if (param->type =='k'){
+        return (data_print(va_arg(param->ap, char*), param));
+    }
+
+
 	return 0;
 }

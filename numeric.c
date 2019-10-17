@@ -17,6 +17,7 @@ int nbr_length(intmax_t nbr, int base) {
     return len;
 }
 
+
 int nbr_length_u(uintmax_t nbr, int base) {
     int len;
 

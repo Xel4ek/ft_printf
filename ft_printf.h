@@ -8,7 +8,7 @@
 # include <stdio.h>
 //# include "libft.h"
 # include <math.h>
-
+# include "data.h"
 
 # define BASE_8 "01234567"
 # define BASE_10 "0123456789"
@@ -46,8 +46,6 @@ typedef struct			s_param
 	int                 line_size;
 	t_flag				flag;
 	va_list				ap;
-
-
 }						t_param;
 
 
@@ -77,4 +75,5 @@ int						ft_dtoa(long double nbr,t_param *param);
 int                     nbr_length_u(uintmax_t nbr, int base);
 int                     ft_dtoa_e(long double nbr, t_param *param);
 int                     ft_ceil(double nbr);
+int                     data_print(char *string, t_param *param);
 #endif
