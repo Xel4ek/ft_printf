@@ -5,9 +5,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <string.h>
-# include <stdio.h>
 //# include "libft.h"
-# include <math.h>
 # include "data.h"
 
 # define BASE_8 "01234567"
@@ -19,7 +17,7 @@
 # define DEFAULT_PRECISION 6
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[0;32m"
-#define GREEN2   "\e[1;32;45m"
+#define GREEN2  "\e[1;32;45m"
 #define YELLOW  "\x1b[33m"
 #define BLUE    "\x1b[34m"
 #define MAGENTA "\x1b[35m"
@@ -39,41 +37,45 @@ typedef struct			s_param
 {
 	unsigned char		type;
 	unsigned char		length;
-	int					width;
-	int					precision;
 	char				*str;
 	unsigned char       sign;
+    int					width;
+    int					precision;
 	int                 line_size;
-	t_flag				flag;
 	va_list				ap;
+	t_flag				flag;
 }						t_param;
 
-
-int 					ft_nbrlen(long long int nbr);
 int						ft_printf(const char *format, ...);
-int                     ft_unbrlen(uintmax_t nbr);
-int						get_flag(const char *str, t_flag *flag);
-int						get_precision(char **str, t_param *param);
-unsigned char			get_length(const char *str);
-unsigned char			get_type(const char *str);
-int						get_width(char *str, t_param *param);
-t_param					*get_param(t_param *new_param, char **str);
-void					print_param(const t_param param);
+int                     ft_printf_fd(const int fd, const char *format, ...);
 int						get_item(t_param *param);
-int						ft_printf(const char *format, ...);
 int                     ft_itoa_u(uintmax_t nbr, t_param *param);
-int						ft_itoa_x(uintmax_t nbr, char *_base);
-int						conversion(t_param *param);
 int						ft_itoa_p(intmax_t nbr, t_param *param);
 int						ft_itoa_b(uintmax_t nbr, char *_base, t_param *param);
-int						nbr_length(intmax_t nbr, int base);
 int						ft_getstr(char *str, t_param *param);
 int						ft_getchar(char c, t_param *param);
-void                    ft_putstring(const int fd, char *string, unsigned int size);
+int                     string_convertation(t_param *param);
+int                     ten_base_int(t_param *param);
+int                     hex_base_int(t_param *param);
+int                     other_base_int(t_param *param);
+int                     double_convertation(t_param *param);
 int						apply_flags(t_param *param);
 int						ft_dtoa(long double nbr,t_param *param);
-int                     nbr_length_u(uintmax_t nbr, int base);
 int                     ft_dtoa_e(long double nbr, t_param *param);
-int                     ft_ceil(double nbr);
 int                     data_print(char *string, t_param *param);
+int                     raw_string(char *string, t_param *param);
+int                     get_flag(const char *str, t_flag *flag);
+int                     get_width(char *str, t_param *param);
+int                     get_precision(char **str, t_param *param);
+int                     shift_string(char *str, int max_len);
+void                    division_two_e(char *str, int max_len);
+void                    add_exponent(t_param *param, int power);
+void                    multiply_two(char *str, int max_len);
+void                    division_two(char *str, int max_len, int i);
+void                    ft_putstring(const int fd, char *string, unsigned int size);
+unsigned char           get_length(const char *str);
+unsigned char           get_type(const char *str);
+t_param					*get_param(t_param *new_param, char **str);
+
+
 #endif

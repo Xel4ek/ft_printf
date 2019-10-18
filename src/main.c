@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 # include <string.h>
 #include <limits.h>
-
+#include <stdio.h>
 int	main()
 {
 
@@ -10,7 +10,7 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=-.0000009999999999999999998099990e-16l;
+	i=.000099999999991999999919998099990e-6;
 
     int m;
     m = 112323;
@@ -28,10 +28,13 @@ int	main()
 //    printf("(   %d) \n",printf("{%s}", "jasdkajksndka\0asda"));
 //    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
 //    printf("(   %d) \n",ft_printf("{%.25Le}", i));
-    printf("(   %d) \n",ft_printf("{%.22Le}", i));
-    printf("(   %d) \n",printf("{%.22Le}", i));
-//    printf("(   %d) \n",printf("{%.25Le}", i));
-//    printf("(   %d) \n",ft_printf("{%.1900Lf}", i));
+    printf("(   %d) \n",ft_printf("{%-+46.14Lf}", i));
+    printf("(   %d) \n",printf("{%-+46.14Lf}", i));
+    printf("(   %d) \n",ft_printf("{%r}", "masml \25 amsdkla"));
+
+    printf("(   %d) \n",printf("{%-+.25Lf}", i));
+    printf("(   %d) \n",ft_printf("{%-+.25Lf}", i));
+    printf("(   %d) \n",ft_printf_fd(1, "{fd: %-+46.14Lf}", i));
 //    printf("(   %d) \n",printf("{%.1900Lf}", i));
 
 //    printf("(   %d) \n",ft_printf("{%#-123k}", "1232-11-21"));
