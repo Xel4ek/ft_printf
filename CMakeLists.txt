@@ -1,95 +1,25 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.14)
 project(ft_printf C)
 
 set(CMAKE_C_STANDARD 11)
-
-include_directories(includes)
-include_directories(lib/libft/includes)
-
-add_executable(ft_printf
-        includes/data.h
-        includes/ft_printf.h
-        lib/libft/includes/libft.h
-        lib/libft/src/ft_atoi.c
-        lib/libft/src/ft_atoi_base.c
-        lib/libft/src/ft_bzero.c
-        lib/libft/src/ft_ceil.c
-        lib/libft/src/ft_isalnum.c
-        lib/libft/src/ft_isalpha.c
-        lib/libft/src/ft_isascii.c
-        lib/libft/src/ft_isdigit.c
-        lib/libft/src/ft_isprint.c
-        lib/libft/src/ft_itoa.c
-        lib/libft/src/ft_itoa_base.c
-        lib/libft/src/ft_lstadd.c
-        lib/libft/src/ft_lstappend.c
-        lib/libft/src/ft_lstdel.c
-        lib/libft/src/ft_lstdelone.c
-        lib/libft/src/ft_lstiter.c
-        lib/libft/src/ft_lstlen.c
-        lib/libft/src/ft_lstmap.c
-        lib/libft/src/ft_lstnew.c
-        lib/libft/src/ft_memalloc.c
-        lib/libft/src/ft_memccpy.c
-        lib/libft/src/ft_memchr.c
-        lib/libft/src/ft_memcmp.c
-        lib/libft/src/ft_memcpy.c
-        lib/libft/src/ft_memdel.c
-        lib/libft/src/ft_memjoin.c
-        lib/libft/src/ft_memmove.c
-        lib/libft/src/ft_memset.c
-        lib/libft/src/ft_putchar.c
-        lib/libft/src/ft_putchar_fd.c
-        lib/libft/src/ft_putendl.c
-        lib/libft/src/ft_putendl_fd.c
-        lib/libft/src/ft_putnbr.c
-        lib/libft/src/ft_putnbr_fd.c
-        lib/libft/src/ft_putstr.c
-        lib/libft/src/ft_putstr_fd.c
-        lib/libft/src/ft_sort_str_table.c
-        lib/libft/src/ft_strcapitalize.c
-        lib/libft/src/ft_strcat.c
-        lib/libft/src/ft_strchr.c
-        lib/libft/src/ft_strclr.c
-        lib/libft/src/ft_strcmp.c
-        lib/libft/src/ft_strcpy.c
-        lib/libft/src/ft_strdel.c
-        lib/libft/src/ft_strdup.c
-        lib/libft/src/ft_strequ.c
-        lib/libft/src/ft_striter.c
-        lib/libft/src/ft_striteri.c
-        lib/libft/src/ft_strjoin.c
-        lib/libft/src/ft_strlcat.c
-        lib/libft/src/ft_strlen.c
-        lib/libft/src/ft_strmap.c
-        lib/libft/src/ft_strmapi.c
-        lib/libft/src/ft_strncat.c
-        lib/libft/src/ft_strncmp.c
-        lib/libft/src/ft_strncpy.c
-        lib/libft/src/ft_strnequ.c
-        lib/libft/src/ft_strnew.c
-        lib/libft/src/ft_strnstr.c
-        lib/libft/src/ft_strrchr.c
-        lib/libft/src/ft_strsplit.c
-        lib/libft/src/ft_strstr.c
-        lib/libft/src/ft_strsub.c
-        lib/libft/src/ft_strtrim.c
-        lib/libft/src/ft_tolower.c
-        lib/libft/src/ft_toupper.c
-        lib/libft/src/get_next_line.c
-        lib/libft/src/ft_nbrlen.c
-        lib/libft/src/ft_ceil.c
+set(SRC
         src/apply_flags.c
         src/data.c
-        src/e_double.c
         src/e_double_tool.c
+        src/e_double.c
         src/f_double.c
         src/ft_printf.c
         src/int_funcions.c
         src/main.c
-        src/numeric.c
         src/parse.c
         src/parse_tool.c
         src/print_tool.c
         src/string_tool.c
         src/tools.c)
+include_directories(
+        includes)
+
+include_directories(lib/libft/includes)
+add_executable(ft_printf ${SRC})
+add_subdirectory(lib/libft)
+target_link_libraries(ft_printf libft)

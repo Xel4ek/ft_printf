@@ -6,23 +6,3 @@
 
 #IncludeRegexTransform: 
 
-../lib/libft/includes/libft.h
-string.h
--
-stdlib.h
--
-sys/types.h
--
-sys/stat.h
--
-fcntl.h
--
-unistd.h
--
-stdint.h
--
-
-/home/alexey/progects/ft_printf/lib/libft/src/ft_nbrlen.c
-libft.h
-/home/alexey/progects/ft_printf/lib/libft/src/libft.h
-

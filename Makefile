@@ -2,23 +2,31 @@ CC =  gcc
 
 NAME = libftprintf.a
 
-SRC = ft_printf.c numeric.c parse.c print_tool.c tools.c
-LIB_OBG = lib/libft/*.o
-OBJ = $(SRC:.c=.o)
+SRC = apply_flags.c data.c e_double_tool.c e_double.c \
+        f_double.c ft_printf.c int_funcions.c parse.c \
+         parse_tool.c print_tool.c string_tool.c tools.c
+SRCDIR = src
+OBJDIR = obj
+LIBDIR = lib/libft
+LIB = libft.a
 
-HEADER = lib/libft/includes
+OBJ =$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+
+HEADERS = -Ilib/libft/includes -I.
+HEADER = ft_printf.h
 
 .PHONY: all clean fclean re
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	cp lib/libft/libft.a libft.a
-	ar x libft.a
-	ar rc $(NAME) $(LIB_OBG) *.o
+$(NAME): $(OBJ) $(HEADER)
+	cp $(LIBDIR)/$(LIB) ./$(NAME)
+	ar rc $(NAME) %(OBJDIR)/%(OBJ)
 	ranlib $(NAME)
 
-$(OBJ):%.o:%.c
-	$(CC) $(FLAGS) -I$(HEADER) -I. -o $@ -c $<
+$(OBJ):$(OBJDIR)%o:$(SRCDIR)%c
+	mkdir -p $(OBJDIR)
+	$(CC) $(FLAGS) $(HEADERS) -o $@ -c $<
 
 clean:
 	rm -f *.o
