@@ -18,6 +18,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdint.h>
 # define MAX_FD 1024
 # define BUFF_SIZE 255
 
@@ -106,5 +107,8 @@ int					get_next_line(const int fd, char **line);
 t_list				*ft_lstappend(t_list *head, t_list *new);
 void				ft_lst_del(t_list **alst);
 char	            *ft_memjoin(void const *src1, void const *src2, size_t size1, size_t size2);
+int					ft_ceil(long double nbr);
+int 				ft_unbrlen(uintmax_t nbr, int base);
+int					ft_nbrlen(intmax_t nbr);
 
 #endif

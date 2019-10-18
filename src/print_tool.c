@@ -1,4 +1,4 @@
-#include "includes/ft_printf.h"
+#include "ft_printf.h"
 
 int get_item(t_param *param) {
     if (param->type == '%' || param->type == 's' || param->type == 'r' ||

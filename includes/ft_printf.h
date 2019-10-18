@@ -1,6 +1,6 @@
 #ifndef FT_PRINTF
 # define FT_PRINTF
-# include "lib/libft/includes/libft.h"
+# include "../lib/libft/includes/libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdint.h>
