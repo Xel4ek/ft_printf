@@ -1,6 +1,0 @@
-{
-	"files.associations": {
-		"cstdint": "cpp",
-		"ft_printf.h": "c"
-	}
-}
