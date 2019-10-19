@@ -4,21 +4,21 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/e/shcool_42/ft_printf/src/apply_flags.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/apply_flags.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/data.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/data.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/e_double.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/e_double.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/e_double_tool.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/e_double_tool.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/f_double.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/f_double.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/ft_printf.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/ft_printf.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/int_funcions.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/int_funcions.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/main.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/main.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/parse.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/parse.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/parse_tool.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/parse_tool.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/print_tool.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/print_tool.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/string_tool.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/string_tool.c.o"
-  "/cygdrive/e/shcool_42/ft_printf/src/tools.c" "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/tools.c.o"
+  "/Users/hwolf/progects/ft_printf/src/apply_flags.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/apply_flags.c.o"
+  "/Users/hwolf/progects/ft_printf/src/data.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/data.c.o"
+  "/Users/hwolf/progects/ft_printf/src/e_double.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/e_double.c.o"
+  "/Users/hwolf/progects/ft_printf/src/e_double_tool.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/e_double_tool.c.o"
+  "/Users/hwolf/progects/ft_printf/src/f_double.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/f_double.c.o"
+  "/Users/hwolf/progects/ft_printf/src/ft_printf.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/ft_printf.c.o"
+  "/Users/hwolf/progects/ft_printf/src/int_funcions.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/int_funcions.c.o"
+  "/Users/hwolf/progects/ft_printf/src/main.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/main.c.o"
+  "/Users/hwolf/progects/ft_printf/src/parse.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/parse.c.o"
+  "/Users/hwolf/progects/ft_printf/src/parse_tool.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/parse_tool.c.o"
+  "/Users/hwolf/progects/ft_printf/src/print_tool.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/print_tool.c.o"
+  "/Users/hwolf/progects/ft_printf/src/string_tool.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/string_tool.c.o"
+  "/Users/hwolf/progects/ft_printf/src/tools.c" "/Users/hwolf/progects/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/src/tools.c.o"
   )
-set(CMAKE_C_COMPILER_ID "GNU")
+set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
@@ -29,7 +29,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/cygdrive/e/shcool_42/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/libft.dir/DependInfo.cmake"
+  "/Users/hwolf/progects/ft_printf/cmake-build-debug/lib/libft/CMakeFiles/libft.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

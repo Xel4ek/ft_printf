@@ -24,13 +24,11 @@ string.h
 stdint.h
 -
 
-/cygdrive/e/shcool_42/ft_printf/src/main.c
+/Users/hwolf/progects/ft_printf/src/data.c
 ft_printf.h
-/cygdrive/e/shcool_42/ft_printf/src/ft_printf.h
-string.h
--
-limits.h
--
-stdio.h
--
+/Users/hwolf/progects/ft_printf/src/ft_printf.h
+
+/Users/hwolf/progects/ft_printf/src/print_tool.c
+ft_printf.h
+/Users/hwolf/progects/ft_printf/src/ft_printf.h
 

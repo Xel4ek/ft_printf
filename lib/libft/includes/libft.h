@@ -6,7 +6,7 @@
 /*   By: hwolf <hwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 11:17:51 by hwolf             #+#    #+#             */
-/*   Updated: 2019/09/19 00:12:28 by odrinkwa         ###   ########.fr       */
+/*   Updated: 2019/10/19 19:37:09 by hwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-
-void	            ft_striter(char *s, void (*f)(char *));
-int	                ft_strcmp(const char *s1, const char *s2);
-void            	ft_strclr(char *s);
-char	            *ft_strcat(char *dst, const char *src);
-int	                ft_isascii(int ch);
-int                 ft_isdigit(int ch);
-int	                ft_isprint(int ch);
+void				ft_striter(char *s, void (*f)(char *));
+int					ft_strcmp(const char *s1, const char *s2);
+void				ft_strclr(char *s);
+char				*ft_strcat(char *dst, const char *src);
+int					ft_isascii(int ch);
+int					ft_isdigit(int ch);
+int					ft_isprint(int ch);
 void				*ft_memset(void *dest, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -101,9 +100,12 @@ void				ft_sort_str_table(char **tab, int size);
 int					get_next_line(const int fd, char **line);
 t_list				*ft_lstappend(t_list *head, t_list *new);
 void				ft_lst_del(t_list **alst);
-char	            *ft_memjoin(void const *src1, void const *src2, size_t size1, size_t size2);
+char				*ft_memjoin(void const *src1, void const *src2,
+						size_t size1, size_t size2);
 int					ft_ceil(long double nbr);
-int 				ft_unbrlen(uintmax_t nbr, int base);
+int					ft_unbrlen(uintmax_t nbr, int base);
 int					ft_nbrlen(intmax_t nbr);
+char				*ft_strjoin_free_first(char **s1, char const *s2);
+char				*ft_strjoin_free_second(char const *s1, char **s2);
 
 #endif

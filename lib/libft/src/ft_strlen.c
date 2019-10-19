@@ -6,7 +6,7 @@
 /*   By: hwolf <hwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:03:30 by hwolf             #+#    #+#             */
-/*   Updated: 2019/09/05 17:49:30 by hwolf            ###   ########.fr       */
+/*   Updated: 2019/10/19 19:27:47 by hwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *str)
 
 	len = 0;
 	if (str)
-	    while (*str++)
-		    ++len;
+		while (*str++)
+			++len;
 	return (len);
 }

@@ -6,10 +6,13 @@
 #    By: hwolf <hwolf@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 15:24:49 by hwolf             #+#    #+#              #
-#    Updated: 2019/09/20 16:29:45 by hwolf            ###   ########.fr        #
+#    Updated: 2019/10/19 15:21:16 by hwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = libft.a
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 SRC =   ft_atoi_base.c  \
         ft_atoi.c  \
         ft_bzero.c  \
@@ -76,35 +79,41 @@ SRC =   ft_atoi_base.c  \
         ft_toupper.c  \
         ft_memjoin.c \
         get_next_line.c  \
+        ft_ceil.c \
+        ft_nbrlen.c
 
-
-
-SRC_DIR = src
-OBJ_DIR = ./
+SRCDIR = src
+OBJDIR = obj
 HEADERS = includes
+OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
+HEADER  = libft.h
 
-OBJ = $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
-CFLAGS = -Wall -Wextra -Werror
-CC = gcc
-NAME = libft.a
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re help
 
 all: $(NAME)
 
+help:
+	@echo "Usage :"
+	@echo "\tmake //create library"
+	@echo "\tmake clean // remove *.o files"
+	@echo "\tmake flean //remove *.o files and library"
+	@echo "\tmake re // redo library"
+
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean  all
 
-$(OBJ):$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+$(OBJ):$(OBJDIR)/%o:$(SRCDIR)/%c
 	$(CC) $(CFLAGS) -I$(HEADERS) -o $@ -c $<
 
-$(NAME): $(OBJ)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(NAME): $(OBJDIR) $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
