@@ -1,5 +1,4 @@
 #include "ft_printf.h"
-#include <stdlib.h>
 
 int string_convertation(t_param *param){
     if (param->type == '%')
@@ -11,7 +10,7 @@ int string_convertation(t_param *param){
     if (param->type == 'r')
         return (raw_string(va_arg(param->ap, char*), param));
     if (param->type == 'k')
-        return (data_print(va_arg(param->ap, char*), param));
+        return (date_to_string(string_to_date(va_arg(param->ap, char*)), param));
     return -1;
 }
 
@@ -107,4 +106,5 @@ int other_base_int(t_param *param)
     if (param->type == 'b') {
         return (ft_itoa_b((uintmax_t) va_arg(param->ap, intmax_t), "01", param));
     }
+	return -1;
 }

@@ -11,6 +11,8 @@ int shift_string(char *str, int max_len) {
             break;
         count++;
     }
+    if (j == max_len)
+		return 0;
     if (count > 0) {
         j = 0;
         while (j++ < max_len - count)

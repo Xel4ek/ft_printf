@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_memjoin(void const *src1, void const *src2, size_t size1, size_t size2)
 {

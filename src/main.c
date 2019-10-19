@@ -10,7 +10,7 @@ int	main()
 //	ft_printf("%s", "test string");
 	char *str;
     long double i;
-	i=.000099999999991999999919998099990e-6;
+	i=-.000099999999991999999919998099990e-6;
 
     int m;
     m = 112323;
@@ -28,13 +28,30 @@ int	main()
 //    printf("(   %d) \n",printf("{%s}", "jasdkajksndka\0asda"));
 //    printf("(   %d) \n",ft_printf("{%f}{%lf}{%Lf}", -1.42, -1.42, -1.42l));
 //    printf("(   %d) \n",ft_printf("{%.25Le}", i));
-    printf("(   %d) \n",ft_printf("{%-+46.14Lf}", i));
-    printf("(   %d) \n",printf("{%-+46.14Lf}", i));
-    printf("(   %d) \n",ft_printf("{%r}", "masml \25 amsdkla"));
+//	printf("%d",sizeof(va_list));
 
-    printf("(   %d) \n",printf("{%-+.25Lf}", i));
-    printf("(   %d) \n",ft_printf("{%-+.25Lf}", i));
-    printf("(   %d) \n",ft_printf_fd(1, "{fd: %-+46.14Lf}", i));
+//    ft_printf("(   %d) \n",ft_printf("{%-+86.54Lf}", i));
+//    printf("(   %d) \n",printf("{%-+86.54Lf}", i));
+//	ft_printf("(   %d) \n",ft_printf("{%r}", "masml \25 amsdkla"));
+    printf("(   %d) \n",printf("{%-+.25Le}", i));
+	ft_printf("(   %d) \n",ft_printf("{%-+.25Le}", i));
+	printf("(   %d) \n",printf("{%-+.25Le}", -i));
+	ft_printf("(   %d) \n",ft_printf("{%-+.25Le}", -i));
+//	ft_printf("(   %d) \n",ft_printf_fd(1, "{fd: %-+46.14Lf}", i));
+//	ft_printf("(   %d) \n",ft_printf("{raw: %r}", "hello \1 ;)"));
+//	ft_printf("(   %d) \n",ft_printf("{structure size: %d}", sizeof(t_param)));
+//	ft_printf("(   %d) \n",ft_printf("{date: %k}", "2020-02-29"));
+//	ft_printf("(   %d) \n",ft_printf("{date: %k}", "2019-02-29"));
+	ft_printf("(   %d) \n",ft_printf("{%.40Le}", 0.l));
+		printf("(   %d) \n",printf("{%.40Le}", 0.l));
+	ft_printf("(   %d) \n",ft_printf("{%.0Le}", 0.l));
+		printf("(   %d) \n",printf("{%.0Le}", 0.l));
+	ft_printf("(   %d) \n",ft_printf("{%.0Le}", 0.l));
+	printf("(   %d) \n",printf("{%.0Le}", 0.l));
+	printf("(   %d) \n",printf("{%.12Lf}", 0.l));
+	ft_printf("(   %d) \n",ft_printf("{%.12Lf}", 0.l));
+	printf("(   %d) \n",printf("{%.0Le}", 30.l));
+	ft_printf("(   %d) \n",ft_printf("{%.0Le}", 30.l));
 //    printf("(   %d) \n",printf("{%.1900Lf}", i));
 
 //    printf("(   %d) \n",ft_printf("{%#-123k}", "1232-11-21"));

@@ -13,11 +13,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
 # include <stdint.h>
 # define MAX_FD 1024
 # define BUFF_SIZE 255

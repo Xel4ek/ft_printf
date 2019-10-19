@@ -14,12 +14,13 @@ int ft_printf(const char *format, ...) {
             printed++;
         }
         if (*ptr) {
-            if (get_param(&param, &ptr))
-                get_item(&param);
-            apply_flags(&param);
-            printed += param.line_size;
-            ft_putstring(1, param.str, param.line_size);
-            ft_memdel((void **) &param.str);
+            if (get_param(&param, &ptr)) {
+				get_item(&param);
+				apply_flags(&param);
+				printed += param.line_size;
+				ft_putstring(1, param.str, param.line_size);
+				ft_memdel((void **) &param.str);
+			}
         }
     }
     va_end (param.ap);
@@ -40,12 +41,13 @@ int ft_printf_fd(const int fd, const char *format, ...) {
             printed++;
         }
         if (*ptr) {
-            if (get_param(&param, &ptr))
-                get_item(&param);
-            apply_flags(&param);
-            printed += param.line_size;
-            ft_putstring(fd, param.str, param.line_size);
-            ft_memdel((void **) &param.str);
+            if (get_param(&param, &ptr)) {
+				get_item(&param);
+				apply_flags(&param);
+				printed += param.line_size;
+				ft_putstring(fd, param.str, param.line_size);
+				ft_memdel((void **) &param.str);
+			}
         }
     }
     va_end (param.ap);

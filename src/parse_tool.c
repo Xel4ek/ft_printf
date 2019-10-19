@@ -17,13 +17,13 @@ int get_flag(const char *str, t_flag *flag) {
     return (1);
 }
 
-int get_width(char *str, t_param *param) {
+int get_width(char **str, t_param *param) {
     int width;
     int next;
 
     next = 0;
-    if (*str == '*') {
-        str++;
+    if (**str == '*') {
+       (*str)++;
         width = va_arg(param->ap, int);
         if (width < 0) {
             param->flag.minus = 1;
@@ -32,11 +32,12 @@ int get_width(char *str, t_param *param) {
             param->width = width;
         next = 1;
     }
-    if ((width = ft_atoi(str))) {
+    else if ((width = ft_atoi(*str))) {
         param->width = width;
-        next = param->width ? ft_nbrlen(param->width) : 0;
+        next = ft_nbrlen(width);
     }
-    return (next);
+	(*str) += next;
+    return 1;
 }
 
 int get_precision(char **str, t_param *param) {
@@ -47,14 +48,16 @@ int get_precision(char **str, t_param *param) {
         if (**str == '*') {
             (*str)++;
             tmp = (int) va_arg(param->ap, int);
-            return (tmp < 0 ? -1 : tmp);
+			param->precision = (tmp < 0 ? -1 : tmp);
+            return 0;
         }
         tmp = (ft_atoi(*str));
         while (**str >= '0' && **str <= '9')
             (*str)++;
-        return tmp;
+		param->precision = tmp;
+        return 0;
     }
-    return (-1);
+    return (1);
 }
 
 unsigned char get_length(const char *str) {
@@ -77,11 +80,11 @@ unsigned char get_length(const char *str) {
     return (0);
 }
 
-unsigned char get_type(const char *str) {
+char get_type(const char *str) {
     if (*str == '%' || *str == 'd' || *str == 'i' || *str == 'u' ||
         *str == 'c' || *str == 's' || *str == 'p' || *str == 'x' ||
         *str == 'X' || *str == 'f' || *str == 'o' || *str == 'b' ||
         *str == 'e' || *str == 'k' || *str == 'r')
-        return (*(unsigned char *) str);
+        return (*str);
     return (0);
 }

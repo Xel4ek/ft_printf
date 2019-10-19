@@ -3,8 +3,8 @@
 void apply_hex(t_param *param, char *prefix)
 {
     if (param->precision == 0 &&
-        (param->line_size == 1 && param->str[0] == '0')) {
-        param->str[0] = 0;
+        (param->line_size == 1 && (param->str)[0] == '0')) {
+		(param->str)[0] = 0;
         param->line_size--;
     }
     if (param->type == 'p') {
@@ -13,7 +13,7 @@ void apply_hex(t_param *param, char *prefix)
     }
     if (param->flag.hash &&
         ((param->type == 'X' || param->type == 'x' || param->type == 'o') &&
-         !(param->str[0] == '0' && param->line_size == 1))) {
+         !((param->str)[0] == '0' && param->line_size == 1))) {
 
         if (param->type == 'o') {
             if (param->precision < 1) {
@@ -89,13 +89,13 @@ void apply_width(t_param *param, char *prefix, int len)//, char space)
 
 
 int apply_flags(t_param *param) {
-    int len;
+    size_t len;
     char *temp;
     char prefix[] = {0, 0, 0};
 
     apply_hex(param, prefix);
     apply_sign(param, prefix);
-    len = param->line_size + ft_strlen(prefix);
+    len = (param->line_size) + ft_strlen(prefix);
     if (param->width < len)
         param->width = len;
     if (len < param->width)

@@ -1,98 +1,89 @@
+#include "ft_printf.h"
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   date.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abooster <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 11:40:26 by abooster          #+#    #+#             */
-/*   Updated: 2019/10/17 12:32:18 by abooster         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "data.h"
-
-int str2date(char* str, int start, int len)
+int is_date_sep(char ch)
 {
-	int tmp, ten, i;
-	char c;
-
-	tmp = 0;
-	ten = 1;
-	i = 0;
-	while(i < len)
-	{
-		c = str[start + len - i - 1];
-		if ((c < '0') || (c > '9'))
-			return -1;
-		tmp += (c-'0') * ten;
-		ten *= 10;
-		i++;
-	}
-	return tmp;
-}
-
-int get_date(char *text, t_date *date)
-{
-//	int	l;
-
-//    date->error = 0;
-//    date->year = ft_atoi(text);
-//    date->month = ft_atoi(text + 5);
-//    date->day = ft_atoi(text + 8);
-//	l = strlen(text);
-	if((text[4] != '-') || (text[7] != '-'))
-        return  (date->error = 1);
-	if((date->year = str2date(text, 0, 4)) == -1)
-        return  (date->error = 1);
-	if((date->month = str2date(text, 5, 2)) == -1)
-        return  (date->error = 1);
-	if((date->day = str2date(text, 8, 2)) == -1)
-        return  (date->error = 1);
-	if (date->month > 12 || date->day > 31)
-	  return  (date->error = 1);
-
-	if ((date->day == 31) && ((date->month == 4) || (date->month == 9) || \
-	(date->month == 11)))
-        return  (date->error = 1);
-	if (((date->day == 29) && (date->month == 2)) && \
-	(((date->year % 4) != 0) || (((date->year % 100) == 0) && \
-	((date->year % 400) != 0))))
-        return  (date->error = 1);
-	if ((date->day > 29) && (date->month) == 2)
-        return  (date->error = 1);
+	if (ch == '-')
+		return (ch);
 	return 0;
 }
 
-int	date_to_str(t_date *date,t_param *param)
-{
-//	if((val_date(text, date)) == -1)
-//		return -1;
-    char string[11]= "valid data";
+int valid_data_input(char *string) {
+	int len;
+	int i;
 
-    param->str = ft_strjoin(param->str, string);
-    param->line_size = ft_strlen(param->str);
-//	printf("%d-%d-%d\n", date->year,date->month,date->day);
-     return 0;
+	i = -1;
+	len = ft_strlen(string);
+	if (len != 10)
+		return (0);
+	while (++i < len) {
+		if (i != 4 && i != 7) {
+			if (ft_isdigit(string[i]) == -1)
+				return 0;
+		}else
+			if (!is_date_sep(string[i]))
+				return 0;
+		}
+	return 1;
 }
 
+t_date *string_to_date(char *str) {
+	t_date *date;
 
-int data_print(char *string, t_param *param)
-{
-    t_date data;
-    get_date(string, &data);
-    if (data.error) {
-        param->str = ft_strjoin(param->str, "Error data");
-        param->line_size = ft_strlen(param->str);
-        return 1;
-    }
-    date_to_str(&data, param);
-    return 0;
+	if(!(date = (t_date*)malloc(sizeof(t_date))))
+		return NULL;
+	date->error = 1;
+	if (valid_data_input(str)) {
+		date->year = (str[0] - '0') * 1000 + (str[1] - '0') * 100 +
+					 (str[2] - '0') * 10 + str[3] - '0';
+		date->sep = str[4];
+		date->month = (unsigned char)((str[5] - '0') * 10 + (str[6] - '0'));
+		date->day = (unsigned char)((str[8] - '0') * 10 + (str[9] - '0'));
+
+		if (date->day > 31 || date->month > 12)
+			return date;
+		if (date->day > 30 && (date->month == 4 ||
+		date->month == 6 || date->month == 9 || date->month == 11))
+			return date;
+		if (date->day > 29 && date->month == 2)
+			return date;
+		if (date->day > 28 && date->month == 2 &&
+			(date->year % 400 && (date->year % 4 && date->year % 100)))
+			return date;
+		date->error = 0;
+	}
+	return  date;
 }
 
+int date_to_string(t_date *date, t_param *param){
+	char ptr[11];
+	char *temp;
+	if(date) {
+		if (unlikely(date->error)) {
+			temp = ft_strjoin(param->str,
+					RED"Invalid date" RESET ": use YYYY-MM-DD format!\n");
+			ft_memdel((void **) &param->str);
+			param->str = temp;
+			param->line_size = ft_strlen(param->str);
+			ft_memdel((void **) &date);
+			return 1;
+		}
+		ptr[0] = (char) ((date->year / 1000) % 10 + '0');
+		ptr[1] = (char) ((date->year / 100) % 10 + '0');
+		ptr[2] = (char) ((date->year / 10) % 10 + '0');
+		ptr[3] = (char) (date->year % 10 + '0');
+		ptr[4] = (char) date->sep;
+		ptr[5] = (char) (date->month / 10 + '0');
+		ptr[6] = (char) (date->month % 10 + '0');
+		ptr[7] = (char) date->sep;
+		ptr[8] = (char) (date->day / 10 + '0');
+		ptr[9] = (char) (date->day % 10 + '0');
+		ptr[10] = 0;
+		temp = ft_strjoin(param->str, ptr);
+		ft_memdel((void **) &param->str);
+		param->str = temp;
+		param->line_size = ft_strlen(param->str);
+		ft_memdel((void **) &date);
+	}
+	return 0;
+}
 

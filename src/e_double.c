@@ -4,7 +4,7 @@ int calculate_number_e(char *str, int max_len, intmax_t exponent) {
     int i;
     int count = 0;
 
-    i = (int) (exponent) - (int) (1 << 14) - 62;
+    i = (int) (exponent) - (int) (1u << 14u) - 62;
     if (i < 0) {
         while (i++) {
             count += shift_string(str, max_len + 1);
@@ -47,7 +47,7 @@ void write_rezult_e(t_param *param, char *str, int max_len, int shift) {
     k = 0;
     shift = round_e_nbr(param, str, max_len, shift);
     while (i < param->precision + 4) {
-        ptr[k++] = str[i++] + '0';
+        ptr[k++] = (char)(str[i++] + '0');
         if (--delta == 0)
             ptr[k++] = '.';
     }
@@ -63,15 +63,22 @@ void ft_dtoa_e_helper(t_param *param, int max_len, uintmax_t mantissa, intmax_t 
     int i;
     char str[max_len + 1];
     int shift;
+	intmax_t zero;
 
-    i = max_len;
+	i = max_len + 1;
+	zero = mantissa;
     while (i--) {
-        str[i] = mantissa % 10;
+        str[i] = (char)(mantissa % 10);
         mantissa /= 10;
     }
-    shift = calculate_number_e(str, max_len, exponent);
-    write_rezult_e(param, str, max_len, shift);
+	if (zero) {
+		shift = calculate_number_e(str, max_len, exponent);
+		write_rezult_e(param, str, max_len, shift - 1);
+	} else
+		write_rezult_e(param, str, max_len, param->precision + 16);
 }
+
+#include <stdio.h>
 
 int ft_dtoa_e(long double nbr, t_param *param) {
     int max_len;
@@ -82,8 +89,8 @@ int ft_dtoa_e(long double nbr, t_param *param) {
         param->precision = DEFAULT_PRECISION;
     ft_memcpy(&mantissa, &nbr, sizeof(mantissa));
     ft_memcpy(&exponent, (void *) (&nbr) + sizeof(mantissa), sizeof(exponent));
-    param->sign = (exponent & 0x8000) >> 15;
-    exponent &= 0x7fff;
+    param->sign =(char)(((uintmax_t)exponent & 0x8000u) >> 15u);
+    exponent = (uintmax_t)exponent & 0x7fffu;
     max_len = param->precision + BASE_NBR_LEN;
     ft_dtoa_e_helper(param, max_len, mantissa, exponent);
     return 1;

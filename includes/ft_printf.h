@@ -1,13 +1,14 @@
 #ifndef FT_PRINTF
 # define FT_PRINTF
-# include "../lib/libft/includes/libft.h"
+//# include "../lib/libft/includes/libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <stdint.h>
 # include <string.h>
-//# include "libft.h"
-# include "data.h"
+# include "libft.h"
 
+# define unlikely(expr) __builtin_expect(!!(expr), 0)
+# define likely(expr) __builtin_expect(!!(expr), 1)
 # define BASE_8 "01234567"
 # define BASE_10 "0123456789"
 # define BASE_16u "0123456789ABCDEF"
@@ -15,13 +16,13 @@
 # define LOG2 0.3010299956639812
 # define BASE_NBR_LEN 20
 # define DEFAULT_PRECISION 6
-#define RED     "\x1b[31m"
-#define GREEN   "\x1b[0;32m"
-#define GREEN2  "\e[1;32;45m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN    "\x1b[36m"
+
+#define RED     "\e[31m"
+#define GREEN   "\e[32m"
+#define YELLOW  "\e[33m"
+#define BLUE    "\e[34m"
+#define MAGENTA "\e[35m"
+#define CYAN    "\e[36m"
 #define RESET   "\e[00m"
 
 typedef struct			s_flag
@@ -35,19 +36,30 @@ typedef struct			s_flag
 
 typedef struct			s_param
 {
-	unsigned char		type;
-	unsigned char		length;
 	char				*str;
-	unsigned char       sign;
-    int					width;
-    int					precision;
 	int                 line_size;
-	va_list				ap;
+	int					precision;
+	char				type;
+	unsigned char		length;
+	char  				sign;
 	t_flag				flag;
+	va_list				ap;
+	int					width;
 }						t_param;
+
+typedef struct		s_date
+{
+	char				sep;
+	char				error;
+	unsigned char		day;
+	unsigned char		month;
+	int					year;
+
+}						t_date;
 
 int						ft_printf(const char *format, ...);
 int                     ft_printf_fd(const int fd, const char *format, ...);
+int						get_param(t_param *new_param, char **str);
 int						get_item(t_param *param);
 int                     ft_itoa_u(uintmax_t nbr, t_param *param);
 int						ft_itoa_p(intmax_t nbr, t_param *param);
@@ -62,20 +74,23 @@ int                     double_convertation(t_param *param);
 int						apply_flags(t_param *param);
 int						ft_dtoa(long double nbr,t_param *param);
 int                     ft_dtoa_e(long double nbr, t_param *param);
-int                     data_print(char *string, t_param *param);
 int                     raw_string(char *string, t_param *param);
 int                     get_flag(const char *str, t_flag *flag);
-int                     get_width(char *str, t_param *param);
+int                     get_width(char **str, t_param *param);
 int                     get_precision(char **str, t_param *param);
 int                     shift_string(char *str, int max_len);
+int						date_to_string(t_date *date, t_param *param);
 void                    division_two_e(char *str, int max_len);
 void                    add_exponent(t_param *param, int power);
 void                    multiply_two(char *str, int max_len);
 void                    division_two(char *str, int max_len, int i);
-void                    ft_putstring(const int fd, char *string, unsigned int size);
-unsigned char           get_length(const char *str);
-unsigned char           get_type(const char *str);
-t_param					*get_param(t_param *new_param, char **str);
+void                    ft_putstring(const int fd, char *string, size_t size);
+unsigned char	       	get_length(const char *str);
+char    	    	 	get_type(const char *str);
+t_date 					*string_to_date(char *str);
+
+
+
 
 
 #endif
