@@ -13,9 +13,9 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
-void	ft_putstring(const int fd, char *string, size_t size)
+size_t	ft_putstring(const int fd, char *string, size_t size)
 {
-	write(fd, string, size);
+	return write(fd, string, size);
 }
 
 int		ft_getchar(char c, t_param *param)

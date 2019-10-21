@@ -10,7 +10,7 @@ set(SRC
         src/f_double.c
         src/ft_printf.c
         src/int_funcions.c
-        src/main.c
+        main.c
         src/parse.c
         src/parse_tool.c
         src/print_tool.c

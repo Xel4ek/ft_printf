@@ -15,22 +15,20 @@
 int	ftprintf_core(const int fd, char *ptr, t_param *param)
 {
 	int printed;
+	char *ptr_last;
 
 	printed = 0;
 	while (*ptr)
 	{
-		while (*ptr != '%' && *ptr)
-		{
-			ft_putchar(*ptr++);
-			printed++;
-		}
+		ptr_last = ft_strch(ptr, '%');
+		printed += ft_putstr_ptr_fd(fd, ptr, ptr_last) ;
+		ptr = ptr_last;
 		if (*ptr)
 			if (get_param(param, &ptr))
 			{
 				get_item(param);
 				apply_flags(param);
-				printed += param->line_size;
-				ft_putstring(fd, param->str, param->line_size);
+				printed += ft_putstring(fd, param->str, param->line_size);
 				ft_memdel((void **)&param->str);
 			}
 	}
