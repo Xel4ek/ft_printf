@@ -23,8 +23,9 @@ int	string_convertation(t_param *param)
 	if (param->type == 'r')
 		return (raw_string(va_arg(param->ap, char*), param));
 	if (param->type == 'k')
-		return (date_to_string(string_to_date(va_arg(param->ap, char*)), param));
-	return (-1);
+		return (date_to_string(string_to_date(
+				va_arg(param->ap, char*)), param));
+		return (-1);
 }
 
 int	double_convertation(t_param *param)

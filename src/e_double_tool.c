@@ -85,7 +85,7 @@ void	add_exponent(t_param *param, int power)
 		prefix[1] = '+';
 	else
 		prefix[1] = '-';
-	if (10 > (ABS(power)))
+	if (ABS(power) < 10)
 		prefix[2] = '0';
 	temp3 = ft_itoa(ABS(power));
 	temp = ft_strjoin(prefix, temp3);

@@ -95,7 +95,7 @@ void				division_two_e(char *str, int max_len);
 void				add_exponent(t_param *param, int power);
 void				multiply_two(char *str, int max_len);
 void				division_two(char *str, int max_len, int i);
-size_t				ft_putstring(const int fd, char *string, size_t size);
+void				ft_putstring(const int fd, char *string, size_t size);
 unsigned char		get_length(const char *str);
 char				get_type(const char *str);
 t_date				*string_to_date(char *str);

@@ -107,6 +107,5 @@ int					ft_unbrlen(uintmax_t nbr, int base);
 int					ft_nbrlen(intmax_t nbr);
 char				*ft_strjoin_free_first(char **s1, char const *s2);
 char				*ft_strjoin_free_second(char const *s1, char **s2);
-char				*ft_strch(const char *str, int ch);
-size_t				ft_putstr_ptr_fd( const int fd, char const *start ,char const *finish);
+
 #endif

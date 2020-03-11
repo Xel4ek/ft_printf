@@ -25,13 +25,3 @@ char	*ft_strchr(const char *str, int c)
 	}
 	return (ptr);
 }
-
-char	*ft_strch(const char *str, int ch)
-{
-	char *ptr;
-
-	ptr = (char*)str;
-	while (*ptr != ch && *ptr)
-		++ptr;
-	return (ptr);
-}

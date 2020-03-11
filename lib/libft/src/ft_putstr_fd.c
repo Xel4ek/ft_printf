@@ -18,10 +18,3 @@ void	ft_putstr_fd(char const *s, int fd)
 	if (s)
 		write(fd, s, ft_strlen(s));
 }
-
-size_t	ft_putstr_ptr_fd(const int fd, char const *start ,char const *finish)
-{
-	if (start && finish && finish > start && fd > 0)
-		return (write(fd, start, finish - start));
-	return (0);
-}

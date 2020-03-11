@@ -62,7 +62,8 @@ void	apply_flag_minus(t_param *param, char *prefix, char *ptr)
 
 	if (param->flag.minus)
 	{
-		temp = ft_memjoin(prefix, param->str, ft_strlen(prefix), param->line_size);
+		temp = ft_memjoin(prefix, param->str,
+				ft_strlen(prefix), param->line_size);
 		param->line_size += ft_strlen(prefix);
 		ft_memdel((void **)&param->str);
 		param->str = ft_memjoin(temp, ptr, param->line_size, ft_strlen(ptr));
