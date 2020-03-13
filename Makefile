@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 CC =  clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O2 -pipe
 
 SRC = apply_flags.c data.c e_double_tool.c e_double.c \
         f_double.c ft_printf.c int_funcions.c parse.c \
