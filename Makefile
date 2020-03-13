@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-CC =  gcc
+CC =  clang
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = apply_flags.c data.c e_double_tool.c e_double.c \
@@ -20,12 +20,12 @@ SRC = apply_flags.c data.c e_double_tool.c e_double.c \
 
 SRCDIR = src
 OBJDIR = obj
-LIBDIR = lib/libft
+LIBDIR = ../libft
 LIB = libft.a
 
 OBJ =$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
-HEADERS = -Ilib/libft/includes -Iincludes
+HEADERS = -I../libft/includes -Iincludes
 HEADER = includes/ft_printf.h
 
 .PHONY: all clean fclean re help
@@ -50,7 +50,6 @@ fclean: clean
 re: fclean all
 
 $(NAME): $(OBJDIR) $(OBJ) $(HEADER) $(LIBDIR)/$(LIB)
-	cp $(LIBDIR)/$(LIB) ./$(NAME)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
