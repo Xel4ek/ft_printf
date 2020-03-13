@@ -50,6 +50,7 @@ fclean: clean
 re: fclean all
 
 $(NAME): $(OBJDIR) $(OBJ) $(HEADER) $(LIBDIR)/$(LIB)
+	cp ../libft/libft.a ./$(NAME)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
