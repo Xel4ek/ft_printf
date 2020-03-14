@@ -35,6 +35,8 @@
 # define MAGENTA			"\e[38;5;199m"
 # define CYAN				"\e[36m"
 # define RESET				"\e[00m"
+# define E					"\e[38;5;"
+# define CLR				"\e[1;1H\e[2J"
 
 typedef struct		s_flag
 {
