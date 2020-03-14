@@ -29,10 +29,10 @@
 # define BASE_NBR_LEN		25
 # define DEFAULT_PRECISION	6
 # define RED				"\e[31m"
-# define GREEN				"\e[32m"
+# define GREEN				"\e[38;5;46m"
 # define YELLOW				"\e[33m"
 # define BLUE				"\e[34m"
-# define MAGENTA			"\e[35m"
+# define MAGENTA			"\e[38;5;199m"
 # define CYAN				"\e[36m"
 # define RESET				"\e[00m"
 
