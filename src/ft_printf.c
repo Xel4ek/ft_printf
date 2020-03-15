@@ -10,29 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <zconf.h>
 #include "ft_printf.h"
 
 int	ftprintf_core(const int fd, char *ptr, t_param *param)
 {
 	int printed;
+	char *next;
 
 	printed = 0;
 	while (*ptr)
 	{
-		while (*ptr != '%' && *ptr)
+		next = ft_strch(ptr, '%');
+		if (next != ptr)
 		{
-			ft_putchar(*ptr++);
-			printed++;
+			ft_putstring(fd, ptr, next - ptr);
+			printed += (int)(next - ptr);
+			ptr = next;
 		}
-		if (*ptr)
-			if (get_param(param, &ptr))
-			{
+		if (*ptr && get_param(param, &ptr))
+		{
 				get_item(param);
 				apply_flags(param);
 				printed += param->line_size;
 				ft_putstring(fd, param->str, param->line_size);
 				ft_memdel((void **)&param->str);
-			}
+		}
 	}
 	return (printed);
 }
@@ -43,7 +46,7 @@ int	ft_printf(const char *format, ...)
 	t_param	param;
 
 	va_start(param.ap, format);
-	printed = ftprintf_core(1, (char*)format, &param);
+	printed = ftprintf_core(STDOUT_FILENO, (char*)format, &param);
 	va_end(param.ap);
 	return (printed);
 }
