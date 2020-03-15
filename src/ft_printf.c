@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <zconf.h>
+#include <unistd.h>
 #include "ft_printf.h"
 
 int	ftprintf_core(const int fd, char *ptr, t_param *param)
