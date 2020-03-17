@@ -30,6 +30,7 @@
 # define DEFAULT_PRECISION	6
 # define RED				"\e[31m"
 # define GREEN				"\e[38;5;46m"
+# define GRAY				"\e[38;5;243m"
 # define YELLOW				"\e[33m"
 # define BLUE				"\e[34m"
 # define MAGENTA			"\e[38;5;199m"
