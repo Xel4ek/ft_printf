@@ -14,7 +14,7 @@
 
 static int	precision_zeroes(t_param *param, int len)
 {
-	char	precition[param->precision - len + 1];
+	char	precition[param->precision + len + 1];
 	char	*temp;
 	int		i;
 
